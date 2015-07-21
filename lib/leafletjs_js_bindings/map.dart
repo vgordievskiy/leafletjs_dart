@@ -6,6 +6,7 @@ import 'package:js_wrapping/js_wrapping.dart';
 
 part 'map.g.dart';
 
-abstract class _Map implements JsInterface  {
-  external factory _Map(var target, JsObject params); 
+@JsName('Map')
+abstract class _LeafletMap implements JsInterface  {
+  external factory _LeafletMap(var target, JsObject params); 
 }

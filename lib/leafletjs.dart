@@ -10,6 +10,7 @@ import 'package:polymer/polymer.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
+import 'leafletjs_js_bindings/TileLayer.dart' as L;
 
 JsObject toJs(var obj) => new JsObject.jsify(obj);
 
@@ -25,7 +26,8 @@ class Leafletjs extends PolymerElement {
   
   Leafletjs.created() : super.created();
 
-  L.Map map;
+  L.LeafletMap map;
+  L.TileLayer mapLayer;
   
   ready() {
     super.ready();
@@ -47,7 +49,11 @@ class Leafletjs extends PolymerElement {
       'center' : new JsObject.jsify(SpbCoord),
       'zoom'   : 13
     };
-    map = new L.Map(targetElement, toJs(params)); 
+    map = new L.LeafletMap(targetElement, toJs(params));
+    
+    {
+      mapLayer = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', toJs({'foo': 'bar'}))..addTo(map);
+    }
   }
   
   _initCustomObjectLayer() {
