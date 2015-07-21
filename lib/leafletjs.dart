@@ -20,9 +20,7 @@ final String map_css = "packages/leafletjs_dart/3pp/leafletjs_0.7.3/leaflet.css"
 
 @CustomTag('leafletjs-map')
 class Leafletjs extends PolymerElement {
-  static var SpbCoord = [30.3, 59.95];
-  static final String LatLongStd = "EPSG:4326";
-  static final String CartesianStd = "EPSG:900913";
+  static var SpbCoord = [59.95, 30.3];
   
   Leafletjs.created() : super.created();
 
