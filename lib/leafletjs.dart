@@ -51,7 +51,7 @@ class Leafletjs extends PolymerElement {
     var targetElement = $['leafletjs-map'];
     var params = {
       'center' : new JsObject.jsify(SpbCoord),
-      'zoom'   : 13
+      'zoom'   : 10
     };
     map = new L.LeafletMap(targetElement, toJs(params));
     
