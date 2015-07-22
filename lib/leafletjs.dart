@@ -9,6 +9,7 @@ import 'package:js_wrapping/js_wrapping.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
 import 'leafletjs_js_bindings/TileLayer.dart' as L;
+import 'leafletjs_js_bindings/geo.dart' as L;
 
 JsObject toJs(var obj) => new JsObject.jsify(obj);
 
@@ -28,6 +29,7 @@ class Leafletjs extends PolymerElement {
   ready() {
     super.ready();
     _initMap();
+    _InitListeners();
   }
   
   attached() {
@@ -59,6 +61,9 @@ class Leafletjs extends PolymerElement {
   }
   
   void _InitListeners() {
+    map.on('moveend', (var e){
+      L.LatLng pnt = map.getCenter();
+    });
   }
 
 }
