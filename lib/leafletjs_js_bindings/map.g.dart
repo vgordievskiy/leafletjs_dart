@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-21T17:08:12.592Z
+// 2015-07-22T00:41:49.425Z
 
 part of leafletjs_dart.bind.map;
 
@@ -9,7 +9,7 @@ part of leafletjs_dart.bind.map;
 // **************************************************************************
 
 @JsName('Map')
-class LeafletMap extends JsInterface implements _LeafletMap {
+class LeafletMap extends Evented implements _LeafletMap {
   LeafletMap.created(JsObject o) : super.created(o);
   LeafletMap(var target, JsObject params)
       : this.created(new JsObject(context['L']['Map'], [target, params]));
