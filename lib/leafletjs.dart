@@ -60,12 +60,6 @@ class Leafletjs extends PolymerElement {
     }
   }
   
-  _initCustomObjectLayer() {
-  }
-  
-  _initImageStyle() {
-  }
-  
   void _InitListeners() {
     map.on('moveend', (var e){
       L.LatLng pnt = map.getCenter();
