@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-22T13:00:28.953Z
+// 2015-07-22T13:06:32.369Z
 
 part of leafletjs_dart.bind.Marker;
 
@@ -8,7 +8,7 @@ part of leafletjs_dart.bind.Marker;
 // Target: abstract class _Marker
 // **************************************************************************
 
-class Marker extends Evented implements _Marker {
+class Marker extends Evented implements ILayer, _Marker {
   Marker.created(JsObject o) : super.created(o);
   Marker(LatLng pnt, JsObject params) : this.created(
           new JsObject(context['L']['Marker'], [__codec3.encode(pnt), params]));

@@ -8,9 +8,11 @@ import 'core.dart';
 import 'geo.dart';
 import 'map.dart';
 
+import 'ILayer.dart';
+
 part 'Marker.g.dart';
 
-abstract class _Marker extends Evented implements JsInterface  {
+abstract class _Marker extends Evented implements JsInterface, ILayer  {
   external factory _Marker(LatLng pnt, JsObject params);
   void addTo(LeafletMap map);
   LatLng getLatLng();
