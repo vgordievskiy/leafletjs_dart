@@ -13,4 +13,5 @@ part 'map.g.dart';
 abstract class _LeafletMap extends Evented implements JsInterface  {
   external factory _LeafletMap(var target, JsObject params);
   LatLng getCenter();
+  LatLngBounds getBounds();
 }
