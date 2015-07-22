@@ -26,10 +26,10 @@ class Leafletjs extends PolymerElement {
   L.LeafletMap map;
   L.TileLayer mapLayer;
   
-  @reflectable()
+  @reflectable
   L.LatLng Center;
   
-  @reflectable()
+  @reflectable
   L.LatLngBounds Region;
   
   ready() {
