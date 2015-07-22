@@ -8,10 +8,16 @@ import 'package:polymer/polymer.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
+import 'leafletjs_js_bindings/ILayer.dart' as L;
 import 'leafletjs_js_bindings/TileLayer.dart' as L;
+import 'leafletjs_js_bindings/Marker.dart' as L;
+import 'leafletjs_js_bindings/Icon.dart' as L;
 import 'leafletjs_js_bindings/geo.dart' as L;
 
-JsObject toJs(var obj) => new JsObject.jsify(obj);
+JsObject toJs(var obj){
+ if (obj is JsInterface) return asJsObject(obj);
+ return new JsObject.jsify(obj);
+}
 
 
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
@@ -31,6 +37,9 @@ class Leafletjs extends PolymerElement {
   
   @reflectable
   L.LatLngBounds Region;
+  
+  L.Icon defMarkerIcon;
+  L.LayerGroup _markersGroup;
   
   ready() {
     super.ready();
@@ -57,6 +66,16 @@ class Leafletjs extends PolymerElement {
     
     { /*for test only - move other place!*/
       mapLayer = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', toJs({'foo': 'bar'}))..addTo(map);
+    }
+    { /*Init marker style*/
+      defMarkerIcon = new L.Icon(toJs({
+        'iconUrl' : _Imageurl
+      }));
+    }
+    {
+      _markersGroup = new L.LayerGroup(toJs([]))..addTo(map);
+      L.Marker marker = new L.Marker(L.LatLng.FromList(SpbCoord), toJs({ 'icon' : toJs(defMarkerIcon)}));
+      _markersGroup.addLayer(marker);
     }
   }
   
