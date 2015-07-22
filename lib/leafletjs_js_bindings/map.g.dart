@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-22T01:08:27.443Z
+// 2015-07-22T10:17:58.594Z
 
 part of leafletjs_dart.bind.map;
 
@@ -14,13 +14,13 @@ class LeafletMap extends Evented implements _LeafletMap {
   LeafletMap(var target, JsObject params)
       : this.created(new JsObject(context['L']['Map'], [target, params]));
   LatLng getCenter() =>
-      __codec3.decode(asJsObject(this).callMethod('getCenter'));
+      __codec7.decode(asJsObject(this).callMethod('getCenter'));
   LatLngBounds getBounds() =>
-      __codec4.decode(asJsObject(this).callMethod('getBounds'));
+      __codec8.decode(asJsObject(this).callMethod('getBounds'));
 }
 /// codec for leafletjs_dart.bind.geo.LatLng
-final __codec3 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
+final __codec7 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
 
 /// codec for leafletjs_dart.bind.geo.LatLngBounds
-final __codec4 =
+final __codec8 =
     new JsInterfaceCodec<LatLngBounds>((o) => new LatLngBounds.created(o));

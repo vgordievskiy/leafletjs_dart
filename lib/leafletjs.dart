@@ -55,7 +55,7 @@ class Leafletjs extends PolymerElement {
     };
     map = new L.LeafletMap(targetElement, toJs(params));
     
-    {
+    { /*for test only - move other place!*/
       mapLayer = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', toJs({'foo': 'bar'}))..addTo(map);
     }
   }
