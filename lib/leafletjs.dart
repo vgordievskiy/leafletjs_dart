@@ -101,7 +101,7 @@ class Leafletjs extends PolymerElement {
   }
   
   void AddMarker(L.LatLng pnt, [Map<String, dynamic> params = null]) {
-    L.Marker marker = new L.Marker(L.LatLng.FromList(SpbCoord), toJs({ 'icon' : toJs(defMarkerIcon)}));
+    L.Marker marker = new L.Marker(pnt, toJs({ 'icon' : toJs(defMarkerIcon)}));
     _markersGroup.addLayer(marker);
   }
   
