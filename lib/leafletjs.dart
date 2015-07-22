@@ -7,6 +7,8 @@ import 'dart:async';
 import 'package:polymer/polymer.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
+export 'leafletjs_js_bindings/geo.dart';
+
 import 'leafletjs_js_bindings/map.dart' as L;
 import 'leafletjs_js_bindings/ILayer.dart' as L;
 import 'leafletjs_js_bindings/TileLayer.dart' as L;
@@ -44,6 +46,8 @@ class Leafletjs extends PolymerElement {
   ready() {
     super.ready();
     _initMap();
+    _InitDefaultIconStyle();
+    _InitMarkerLayers();
     _InitListeners();
   }
   
@@ -67,16 +71,17 @@ class Leafletjs extends PolymerElement {
     { /*for test only - move other place!*/
       mapLayer = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', toJs({'foo': 'bar'}))..addTo(map);
     }
-    { /*Init marker style*/
-      defMarkerIcon = new L.Icon(toJs({
-        'iconUrl' : _Imageurl
-      }));
-    }
-    {
-      _markersGroup = new L.LayerGroup(toJs([]))..addTo(map);
-      L.Marker marker = new L.Marker(L.LatLng.FromList(SpbCoord), toJs({ 'icon' : toJs(defMarkerIcon)}));
-      _markersGroup.addLayer(marker);
-    }
+  }
+  
+  void _InitDefaultIconStyle() {
+    /*Init marker style*/
+    defMarkerIcon = new L.Icon(toJs({
+      'iconUrl' : _Imageurl
+    }));
+  }
+  
+  void _InitMarkerLayers() {
+    _markersGroup = new L.LayerGroup(toJs([]))..addTo(map);
   }
   
   void _InitListeners() {
@@ -94,6 +99,15 @@ class Leafletjs extends PolymerElement {
       }
       notifyChanges();
     });
+  }
+  
+  void AddMarker(L.LatLng pnt, [Map<String, dynamic> params = null]) {
+    L.Marker marker = new L.Marker(L.LatLng.FromList(SpbCoord), toJs({ 'icon' : toJs(defMarkerIcon)}));
+    _markersGroup.addLayer(marker);
+  }
+  
+  void ClearAllMarkers() {
+    _markersGroup.clearLayers();
   }
 
 }
