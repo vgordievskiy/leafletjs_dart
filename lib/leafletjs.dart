@@ -26,6 +26,12 @@ class Leafletjs extends PolymerElement {
   L.LeafletMap map;
   L.TileLayer mapLayer;
   
+  @reflectable()
+  L.LatLng Center;
+  
+  @reflectable()
+  L.LatLngBounds Region;
+  
   ready() {
     super.ready();
     _initMap();
@@ -63,6 +69,17 @@ class Leafletjs extends PolymerElement {
   void _InitListeners() {
     map.on('moveend', (var e){
       L.LatLng pnt = map.getCenter();
+      { /*Notify of visible region are changed*/
+        L.LatLngBounds newRegion = map.getBounds();
+        notifyPropertyChange(#Region, Region, newRegion);
+        Region = newRegion;
+      }
+      { /*Notify of center are changed*/
+        L.LatLng newCenter = map.getCenter();
+        notifyPropertyChange(#Center, Center, newCenter);
+        Center = newCenter;
+      }
+      notifyChanges();
     });
   }
 
