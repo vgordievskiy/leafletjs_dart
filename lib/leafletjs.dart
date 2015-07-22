@@ -86,7 +86,6 @@ class Leafletjs extends PolymerElement {
   
   void _InitListeners() {
     map.on('moveend', (var e){
-      L.LatLng pnt = map.getCenter();
       { /*Notify of visible region are changed*/
         L.LatLngBounds newRegion = map.getBounds();
         notifyPropertyChange(#Region, Region, newRegion);
