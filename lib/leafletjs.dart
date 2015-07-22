@@ -25,9 +25,11 @@ final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png
 final String map_css = "packages/leafletjs_dart/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
-  static L.TileLayer getOSM() {
-    return new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', toJs({}));
-  }
+  static Map<String, Function> avaliableMaps = { 
+    'OSM' : () => new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', toJs({}))
+  }; 
+  
+  static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
 }
 
 @CustomTag('leafletjs-map')
@@ -38,6 +40,9 @@ class Leafletjs extends PolymerElement {
 
   L.LeafletMap map;
   L.TileLayer mapLayer;
+  
+  @observable
+  String map_type = "OSM";
   
   @reflectable
   L.LatLng Center;
@@ -72,10 +77,7 @@ class Leafletjs extends PolymerElement {
       'zoom'   : 10
     };
     map = new L.LeafletMap(targetElement, toJs(params));
-    
-    { /*for test only - move other place!*/
-      mapLayer = MapHelpers.getOSM()..addTo(map);
-    }
+    mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
   }
   
   void _InitDefaultIconStyle() {
