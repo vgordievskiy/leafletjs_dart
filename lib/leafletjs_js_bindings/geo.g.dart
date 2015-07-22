@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-22T13:25:06.986Z
+// 2015-07-22T23:37:47.661Z
 
 part of leafletjs_dart.bind.geo;
 
@@ -28,18 +28,18 @@ class LatLngBounds extends JsInterface implements _LatLngBounds {
   LatLngBounds.created(JsObject o) : super.created(o);
   LatLngBounds(LatLng SW, LatLng NE) : this.created(new JsObject(
           context['L']['LatLngBounds'], [
-        __codec2.encode(SW),
-        __codec2.encode(NE)
+        __codec17.encode(SW),
+        __codec17.encode(NE)
       ]));
   bool isValid() => asJsObject(this).callMethod('isValid');
   LatLng getSouthWest() =>
-      __codec2.decode(asJsObject(this).callMethod('getSouthWest'));
+      __codec17.decode(asJsObject(this).callMethod('getSouthWest'));
   LatLng getNorthEast() =>
-      __codec2.decode(asJsObject(this).callMethod('getNorthEast'));
+      __codec17.decode(asJsObject(this).callMethod('getNorthEast'));
   LatLng getNorthWest() =>
-      __codec2.decode(asJsObject(this).callMethod('getNorthWest'));
+      __codec17.decode(asJsObject(this).callMethod('getNorthWest'));
   LatLng getSouthEast() =>
-      __codec2.decode(asJsObject(this).callMethod('getSouthEast'));
+      __codec17.decode(asJsObject(this).callMethod('getSouthEast'));
 }
 /// codec for leafletjs_dart.bind.geo.LatLng
-final __codec2 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
+final __codec17 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));

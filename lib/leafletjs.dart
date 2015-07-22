@@ -21,9 +21,14 @@ JsObject toJs(var obj){
  return new JsObject.jsify(obj);
 }
 
-
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
 final String map_css = "packages/leafletjs_dart/3pp/leafletjs_0.7.3/leaflet.css";
+
+class MapHelpers {
+  static L.TileLayer getOSM() {
+    return new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', toJs({}));
+  }
+}
 
 @CustomTag('leafletjs-map')
 class Leafletjs extends PolymerElement {
@@ -69,7 +74,7 @@ class Leafletjs extends PolymerElement {
     map = new L.LeafletMap(targetElement, toJs(params));
     
     { /*for test only - move other place!*/
-      mapLayer = new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', toJs({}))..addTo(map);
+      mapLayer = MapHelpers.getOSM()..addTo(map);
     }
   }
   
