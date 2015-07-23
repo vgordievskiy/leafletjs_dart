@@ -20,4 +20,6 @@ abstract class _LeafletMap extends Evented implements JsInterface  {
   addLayer(ILayer layer);
   removeLayer(ILayer layer);
   bool hasLayer(ILayer layer);
+  
+  invalidateSize({bool animate : false});
 }
