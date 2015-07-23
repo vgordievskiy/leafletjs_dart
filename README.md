@@ -6,5 +6,5 @@ See http://leafletjs.com/
 add this code in pubspec.yalm
 
 <p>dependencies:</p>
-	leafletjs_dart:
+	leafletjs:
 	        git: https://github.com/vgordievskiy/leafletjs_dart.git
