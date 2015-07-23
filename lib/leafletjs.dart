@@ -108,9 +108,20 @@ class Leafletjs extends PolymerElement {
     });
   }
   
-  void AddMarker(L.LatLng pnt, {L.Icon icon : null}) {
+  void AddMarker(
+    L.LatLng pnt,
+    {
+      L.Icon icon : null,
+      String title : ""
+    })
+  {
     L.Icon usedIcon = icon != null ? icon : defMarkerIcon;
-    L.Marker marker = new L.Marker(pnt, toJs({ 'icon' : toJs(usedIcon)}));
+    L.Marker marker = new L.Marker(
+      pnt,
+      toJs({
+        'icon'  : toJs(usedIcon),
+        'title' : title
+    }));
     _markersGroup.addLayer(marker);
   }
   
