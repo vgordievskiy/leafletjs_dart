@@ -8,6 +8,7 @@ import 'package:polymer/polymer.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
 export 'leafletjs_js_bindings/geo.dart';
+export 'leafletjs_js_bindings/Icon.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
 import 'leafletjs_js_bindings/ILayer.dart' as L;
@@ -107,8 +108,9 @@ class Leafletjs extends PolymerElement {
     });
   }
   
-  void AddMarker(L.LatLng pnt, [Map<String, dynamic> params = null]) {
-    L.Marker marker = new L.Marker(pnt, toJs({ 'icon' : toJs(defMarkerIcon)}));
+  void AddMarker(L.LatLng pnt, {L.Icon icon : null}) {
+    L.Icon usedIcon = icon != null ? icon : defMarkerIcon;
+    L.Marker marker = new L.Marker(pnt, toJs({ 'icon' : toJs(usedIcon)}));
     _markersGroup.addLayer(marker);
   }
   
