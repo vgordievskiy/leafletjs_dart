@@ -17,4 +17,5 @@ abstract class _Marker extends Evented implements JsInterface, ILayer  {
   void addTo(LeafletMap map);
   LatLng getLatLng();
   setLatLng(LatLng pnt);
+  bindPopup(dynamic el);
 }

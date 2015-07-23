@@ -113,7 +113,8 @@ class Leafletjs extends PolymerElement {
     L.LatLng pnt,
     {
       L.Icon icon : null,
-      String title : ""
+      String title : "",
+      dynamic popup : null
     })
   {
     L.Icon usedIcon = icon != null ? icon : defMarkerIcon;
@@ -123,6 +124,9 @@ class Leafletjs extends PolymerElement {
         'icon'  : toJs(usedIcon),
         'title' : title
     }));
+    
+    if (popup!=null)  marker.bindPopup(popup);
+    
     _markersGroup.addLayer(marker);
   }
   
