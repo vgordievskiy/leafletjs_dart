@@ -22,7 +22,7 @@ JsObject toJs(var obj){
 }
 
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
-final String map_css = "packages/leafletjs_dart/3pp/leafletjs_0.7.3/leaflet.css";
+final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 

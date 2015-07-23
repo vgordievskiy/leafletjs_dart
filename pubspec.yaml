@@ -1,4 +1,4 @@
-name: leafletjs_dart
+name: leafletjs
 version: 0.0.1
 description: Dart wrapper for leafletjs map
 environment:
