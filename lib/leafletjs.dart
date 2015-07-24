@@ -113,7 +113,7 @@ class Leafletjs extends PolymerElement {
     });
   }
   
-  void AddMarker(
+  String AddMarker(
     L.LatLng pnt,
     {
       L.Icon icon : null,
@@ -132,6 +132,7 @@ class Leafletjs extends PolymerElement {
     if (popup!=null)  marker.bindPopup(popup);
     
     _markersGroup.addLayer(marker);
+    return L.stamp(toJs(marker));
   }
   
   void ClearAllMarkers() {

@@ -6,5 +6,5 @@ import 'package:js_wrapping/js_wrapping.dart';
 
 String stamp(JsObject obj) {
   JsFunction cntx = context['L']['Util']['stamp'];
-  return cntx.apply([obj]);
+  return cntx.apply([obj]).toString();
 }
