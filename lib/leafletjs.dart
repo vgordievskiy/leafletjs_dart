@@ -113,7 +113,7 @@ class Leafletjs extends PolymerElement {
     });
   }
   
-  String AddMarker(
+  int AddMarker(
     L.LatLng pnt,
     {
       L.Icon icon : null,
