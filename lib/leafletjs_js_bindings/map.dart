@@ -8,6 +8,7 @@ import 'core.dart';
 import 'geo.dart';
 
 import 'ILayer.dart';
+import 'IHandler.dart';
 
 part 'map.g.dart';
 
@@ -22,4 +23,12 @@ abstract class _LeafletMap extends Evented implements JsInterface  {
   bool hasLayer(ILayer layer);
   
   invalidateSize({bool animate : false});
+  
+  IHandler get dragging;
+  IHandler get doubleClickZoom;
+  IHandler get scrollWheelZoom;
+  IHandler get boxZoom;
+  IHandler get keyboard;
+  IHandler get tap;
+  IHandler get touchZoom;
 }

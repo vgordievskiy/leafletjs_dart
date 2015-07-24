@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-23T17:00:23.665Z
+// 2015-07-24T02:12:30.067Z
 
 part of leafletjs_dart.bind.map;
 
@@ -14,16 +14,16 @@ class LeafletMap extends Evented implements _LeafletMap {
   LeafletMap(var target, JsObject params)
       : this.created(new JsObject(context['L']['Map'], [target, params]));
   LatLng getCenter() =>
-      __codec4.decode(asJsObject(this).callMethod('getCenter'));
+      __codec6.decode(asJsObject(this).callMethod('getCenter'));
   LatLngBounds getBounds() =>
-      __codec5.decode(asJsObject(this).callMethod('getBounds'));
+      __codec7.decode(asJsObject(this).callMethod('getBounds'));
 
   addLayer(ILayer layer) =>
-      asJsObject(this).callMethod('addLayer', [__codec6.encode(layer)]);
+      asJsObject(this).callMethod('addLayer', [__codec8.encode(layer)]);
   removeLayer(ILayer layer) =>
-      asJsObject(this).callMethod('removeLayer', [__codec6.encode(layer)]);
+      asJsObject(this).callMethod('removeLayer', [__codec8.encode(layer)]);
   bool hasLayer(ILayer layer) =>
-      asJsObject(this).callMethod('hasLayer', [__codec6.encode(layer)]);
+      asJsObject(this).callMethod('hasLayer', [__codec8.encode(layer)]);
 
   invalidateSize({bool animate: false}) => asJsObject(this).callMethod(
       'invalidateSize', [
@@ -33,13 +33,26 @@ class LeafletMap extends Evented implements _LeafletMap {
       return o;
     }()
   ]);
+
+  IHandler get dragging => __codec5.decode(asJsObject(this)['dragging']);
+  IHandler get doubleClickZoom =>
+      __codec5.decode(asJsObject(this)['doubleClickZoom']);
+  IHandler get scrollWheelZoom =>
+      __codec5.decode(asJsObject(this)['scrollWheelZoom']);
+  IHandler get boxZoom => __codec5.decode(asJsObject(this)['boxZoom']);
+  IHandler get keyboard => __codec5.decode(asJsObject(this)['keyboard']);
+  IHandler get tap => __codec5.decode(asJsObject(this)['tap']);
+  IHandler get touchZoom => __codec5.decode(asJsObject(this)['touchZoom']);
 }
+/// codec for leafletjs_dart.bind.IHandler.IHandler
+final __codec5 = new JsInterfaceCodec<IHandler>((o) => new IHandler.created(o));
+
 /// codec for leafletjs_dart.bind.geo.LatLng
-final __codec4 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
+final __codec6 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
 
 /// codec for leafletjs_dart.bind.geo.LatLngBounds
-final __codec5 =
+final __codec7 =
     new JsInterfaceCodec<LatLngBounds>((o) => new LatLngBounds.created(o));
 
 /// codec for leafletjs_dart.bind.ILayer.ILayer
-final __codec6 = new JsInterfaceCodec<ILayer>((o) => new ILayer.created(o));
+final __codec8 = new JsInterfaceCodec<ILayer>((o) => new ILayer.created(o));
