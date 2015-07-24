@@ -8,4 +8,7 @@ part 'IHandler.g.dart';
 
 abstract class _IHandler implements JsInterface  {
   external factory _IHandler();
+  enable();
+  disable();
+  bool enabled();
 }
