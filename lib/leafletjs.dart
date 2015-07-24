@@ -16,6 +16,7 @@ import 'leafletjs_js_bindings/TileLayer.dart' as L;
 import 'leafletjs_js_bindings/Marker.dart' as L;
 import 'leafletjs_js_bindings/Icon.dart' as L;
 import 'leafletjs_js_bindings/geo.dart' as L;
+import 'leafletjs_js_bindings/Util.dart' as L;
 
 JsObject toJs(var obj){
  if (obj is JsInterface) return asJsObject(obj);
