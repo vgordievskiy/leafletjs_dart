@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-22T23:37:47.644Z
+// 2015-07-24T16:06:30.841Z
 
 part of leafletjs_dart.bind.TileLayer;
 
@@ -13,9 +13,9 @@ class TileLayer extends Evented implements ILayer, _TileLayer {
   TileLayer(String url, JsObject params)
       : this.created(new JsObject(context['L']['TileLayer'], [url, params]));
   void addTo(LeafletMap map) {
-    asJsObject(this).callMethod('addTo', [__codec16.encode(map)]);
+    asJsObject(this).callMethod('addTo', [__codec17.encode(map)]);
   }
 }
 /// codec for leafletjs_dart.bind.map.LeafletMap
-final __codec16 =
+final __codec17 =
     new JsInterfaceCodec<LeafletMap>((o) => new LeafletMap.created(o));
