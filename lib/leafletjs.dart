@@ -118,6 +118,11 @@ class Leafletjs extends PolymerElement {
       notifyChange(evt);
       asyncDeliverChanges();
     });
+    map.on('click', (JsObject e){
+      L.MouseEvent evt = new L.MouseEvent.fromJs('click', e['latlng']);
+      notifyChange(evt);
+      asyncDeliverChanges();
+    });
   }
   
   int AddMarker(
