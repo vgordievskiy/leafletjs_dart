@@ -84,6 +84,7 @@ class Leafletjs extends PolymerElement {
     mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
     
     if(map.tap!= null) map.tap.disable();
+    if(map.doubleClickZoom!=null) map.doubleClickZoom.disable();
     
     new Future(() =>map.invalidateSize());
   }
