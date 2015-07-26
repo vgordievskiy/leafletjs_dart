@@ -17,6 +17,8 @@ abstract class _LayerGroup implements JsInterface {
   addTo(LeafletMap map);
   addLayer(ILayer layer);
   removeLayer(ILayer layer);
+  @JsName('removeLayer')
+    removeLayerById(String id);
   bool hasLayer(ILayer layer);
   ILayer getLayer(String id);
   clearLayers();

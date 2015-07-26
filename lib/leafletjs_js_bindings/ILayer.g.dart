@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-26T16:25:23.032Z
+// 2015-07-26T16:35:17.299Z
 
 part of leafletjs_dart.bind.ILayer;
 
@@ -27,6 +27,9 @@ class LayerGroup extends JsInterface implements _LayerGroup {
       asJsObject(this).callMethod('addLayer', [__codec6.encode(layer)]);
   removeLayer(ILayer layer) =>
       asJsObject(this).callMethod('removeLayer', [__codec6.encode(layer)]);
+
+  removeLayerById(String id) =>
+      asJsObject(this).callMethod('removeLayer', [id]);
   bool hasLayer(ILayer layer) =>
       asJsObject(this).callMethod('hasLayer', [__codec6.encode(layer)]);
   ILayer getLayer(String id) =>
