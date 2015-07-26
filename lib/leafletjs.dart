@@ -96,7 +96,8 @@ class Leafletjs extends PolymerElement {
     image.onLoad.listen((var el){
       defMarkerIcon = new L.Icon(toJs({
         'iconUrl' : _Imageurl,
-        'iconAnchor': toJs([image.width ~/ 2, image.height])
+        'iconAnchor': toJs([image.width ~/ 2, image.height]),
+        'popupAnchor': toJs([image.width ~/(-2), image.height*(-1)])
       }));
     });
   }
