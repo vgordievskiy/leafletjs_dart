@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-26T17:41:32.379Z
+// 2015-07-26T20:50:34.578Z
 
 part of leafletjs_dart.bind.Marker;
 
@@ -21,6 +21,7 @@ class Marker extends Evented implements ILayer, _Marker {
       asJsObject(this).callMethod('setLatLng', [__codec3.encode(pnt)]);
   bindPopup(dynamic el, JsObject params) =>
       asJsObject(this).callMethod('bindPopup', [el, params]);
+  JsObject toGeoJSON() => asJsObject(this).callMethod('toGeoJSON');
 }
 /// codec for leafletjs_dart.bind.geo.LatLng
 final __codec3 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));

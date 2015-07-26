@@ -18,4 +18,5 @@ abstract class _Marker extends Evented implements JsInterface, ILayer  {
   LatLng getLatLng();
   setLatLng(LatLng pnt);
   bindPopup(dynamic el, JsObject params);
+  JsObject toGeoJSON();
 }
