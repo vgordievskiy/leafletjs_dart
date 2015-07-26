@@ -25,8 +25,8 @@ JsObject toJs(var obj){
  return new JsObject.jsify(obj);
 }
 
-final String _leafletDefMarker = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
-final String _Imageurl = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/marker-icon.png';
+final String _leafletDefMarker = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/marker-icon.png';
+final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
 final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
