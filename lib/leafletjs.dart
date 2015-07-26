@@ -148,7 +148,7 @@ class Leafletjs extends PolymerElement {
         'title' : title
     }));
     
-    if (popup!=null)  marker.bindPopup(popup);
+    if (popup!=null)  marker.bindPopup(popup ,toJs({}));
     
     _markersGroup.addLayer(marker);
     return L.stamp(toJs(marker));
