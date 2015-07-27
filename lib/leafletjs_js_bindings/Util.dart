@@ -8,3 +8,8 @@ int stamp(JsObject obj) {
   JsFunction cntx = context['L']['Util']['stamp'];
   return cntx.apply([obj]);
 }
+
+String toJSON(JsObject obj) {
+  JsFunction cntx = context['JSON']['stringify'];
+  return cntx.apply([obj]);
+}
