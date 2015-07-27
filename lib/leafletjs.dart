@@ -11,6 +11,7 @@ export 'Events/MouseEvent.dart';
 export 'leafletjs_js_bindings/geo.dart';
 export 'leafletjs_js_bindings/Icon.dart';
 export 'leafletjs_js_bindings/Marker.dart';
+export 'leafletjs_js_bindings/Util.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
 import 'leafletjs_js_bindings/ILayer.dart' as L;
