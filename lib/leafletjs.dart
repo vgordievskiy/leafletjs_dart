@@ -11,6 +11,7 @@ export 'Events/MouseEvent.dart';
 export 'leafletjs_js_bindings/geo.dart';
 export 'leafletjs_js_bindings/Icon.dart';
 export 'leafletjs_js_bindings/Marker.dart';
+export 'leafletjs_js_bindings/ILayer.dart';
 export 'leafletjs_js_bindings/Util.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
@@ -158,6 +159,14 @@ class Leafletjs extends PolymerElement {
   
   L.Marker GetMarker(int id) {
     return new L.Marker.created(toJs(_markersGroup.getLayer("$id")));
+  }
+  
+  Map<int, L.Marker> GetMarkers() {
+    Map<int, L.Marker> ret = new Map();
+    for(L.ILayer layer in _markersGroup.getLayers()) {
+      ret[L.stamp(toJs(layer))] = new L.Marker.created(toJs(layer));
+    }
+    return ret;
   }
   
   RemoveMarker(int id) {

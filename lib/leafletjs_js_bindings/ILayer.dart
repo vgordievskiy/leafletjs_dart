@@ -21,5 +21,6 @@ abstract class _LayerGroup implements JsInterface {
     removeLayerById(String id);
   bool hasLayer(ILayer layer);
   ILayer getLayer(String id);
+  List<ILayer> getLayers();
   clearLayers();
 }
