@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-29T17:21:36.412Z
+// 2015-07-30T00:52:30.211Z
 
 part of leafletjs_dart.bind.ILayer;
 

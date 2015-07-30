@@ -95,10 +95,10 @@ class Leafletjs extends PolymerElement {
   
   void _InitDefaultIconStyle() {
     /*Init marker style*/
-    ImageElement image =  new ImageElement(src: _Imageurl);
+    ImageElement image =  new ImageElement(src: _leafletDefMarker);
     image.onLoad.listen((var el){
       defMarkerIcon = new L.Icon(toJs({
-        'iconUrl' : _Imageurl,
+        'iconUrl' : _leafletDefMarker,
         'iconAnchor': toJs([image.width ~/ 2, image.height]),
         'popupAnchor': toJs([image.width ~/(-2), image.height*(-1)])
       }));
