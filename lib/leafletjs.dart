@@ -34,7 +34,8 @@ final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
-    'OSM' : () => new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', toJs({})),
+    'OSM' : () => new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                                   toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' })),
     'OSM-Surfer' :() => new L.TileLayer('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
                                         toJs({ 'attribution' : '''Imagery from
                                                                   <a href="http://giscience.uni-hd.de/">
