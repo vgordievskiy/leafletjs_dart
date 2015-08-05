@@ -8,6 +8,7 @@ import 'package:polymer/polymer.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
 export 'Events/MouseEvent.dart';
+export 'Events/MarkerEvent.dart';
 export 'leafletjs_js_bindings/geo.dart';
 export 'leafletjs_js_bindings/Icon.dart';
 export 'leafletjs_js_bindings/Marker.dart';
@@ -22,6 +23,7 @@ import 'leafletjs_js_bindings/Icon.dart' as L;
 import 'leafletjs_js_bindings/geo.dart' as L;
 import 'leafletjs_js_bindings/Util.dart' as L;
 import 'Events/MouseEvent.dart' as L;
+import 'Events/MarkerEvent.dart' as L;
 
 JsObject toJs(var obj){
  if (obj is JsInterface) return asJsObject(obj);
@@ -142,6 +144,14 @@ class Leafletjs extends PolymerElement {
     });
   }
   
+  _initMarkerListener(L.Marker marker) {
+    marker.on('click', (JsObject e){
+      L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e['target'], e['latlng']);
+      notifyChange(evt);
+      asyncDeliverChanges();
+    });
+  }
+  
   int AddMarker(
     L.LatLng pnt,
     {
@@ -161,6 +171,7 @@ class Leafletjs extends PolymerElement {
     if (popup!=null)  marker.bindPopup(popup ,toJs({}));
     
     _markersGroup.addLayer(marker);
+    _initMarkerListener(marker);
     return L.stamp(toJs(marker));
   }
   

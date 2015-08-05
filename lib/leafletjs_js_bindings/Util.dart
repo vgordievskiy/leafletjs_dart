@@ -13,3 +13,8 @@ String toJSON(JsObject obj) {
   JsFunction cntx = context['JSON']['stringify'];
   return cntx.apply([obj]);
 }
+
+JsObject toJs(var obj){
+ if (obj is JsInterface) return asJsObject(obj);
+ return new JsObject.jsify(obj);
+}
