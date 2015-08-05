@@ -152,6 +152,10 @@ class Leafletjs extends PolymerElement {
     });
   }
   
+  Invalidatesize() {
+    new Future(() =>map.invalidateSize());
+  }
+  
   int AddMarker(
     L.LatLng pnt,
     {
