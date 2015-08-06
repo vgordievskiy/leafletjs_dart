@@ -19,6 +19,7 @@ abstract class _LeafletMap extends Evented implements JsInterface  {
   LatLngBounds getBounds();
   
   setView(LatLng center);
+  setZoom(int number);
   addLayer(ILayer layer);
   removeLayer(ILayer layer);
   bool hasLayer(ILayer layer);

@@ -156,6 +156,10 @@ class Leafletjs extends PolymerElement {
     map.setView(pnt);
   }
   
+  void SetZoom(int number) {
+    map.setZoom(number);
+  }
+  
   Invalidatesize() {
     new Future(() =>map.invalidateSize());
   }

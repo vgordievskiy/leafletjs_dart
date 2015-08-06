@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-08-06T16:45:10.316Z
+// 2015-08-06T16:57:43.826Z
 
 part of leafletjs_dart.bind.map;
 
@@ -20,6 +20,7 @@ class LeafletMap extends Evented implements _LeafletMap {
 
   setView(LatLng center) =>
       asJsObject(this).callMethod('setView', [__codec6.encode(center)]);
+  setZoom(int number) => asJsObject(this).callMethod('setZoom', [number]);
   addLayer(ILayer layer) =>
       asJsObject(this).callMethod('addLayer', [__codec8.encode(layer)]);
   removeLayer(ILayer layer) =>
