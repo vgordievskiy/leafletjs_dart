@@ -152,6 +152,10 @@ class Leafletjs extends PolymerElement {
     });
   }
   
+  void SetCenter(L.LatLng pnt) {
+    map.setView(pnt);
+  }
+  
   Invalidatesize() {
     new Future(() =>map.invalidateSize());
   }
