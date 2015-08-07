@@ -161,7 +161,7 @@ class Leafletjs extends PolymerElement {
   }
   
   Invalidatesize() {
-    new Future.delayed(new Duration(milliseconds: 100), () =>map.invalidateSize());
+    new Future.delayed(new Duration(milliseconds: 300), () =>map.invalidateSize());
   }
   
   int AddMarker(
