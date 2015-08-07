@@ -25,6 +25,8 @@ abstract class _LeafletMap extends Evented implements JsInterface  {
   bool hasLayer(ILayer layer);
   
   invalidateSize({bool animate : false});
+  @JsName('invalidateSize')
+      invalidateSizeWithParams(JsObject params);
   
   IHandler get dragging;
   IHandler get doubleClickZoom;

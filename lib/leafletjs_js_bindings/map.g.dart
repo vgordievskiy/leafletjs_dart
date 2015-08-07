@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-08-06T16:57:43.826Z
+// 2015-08-07T01:37:14.822Z
 
 part of leafletjs_dart.bind.map;
 
@@ -36,6 +36,9 @@ class LeafletMap extends Evented implements _LeafletMap {
       return o;
     }()
   ]);
+
+  invalidateSizeWithParams(JsObject params) =>
+      asJsObject(this).callMethod('invalidateSize', [params]);
 
   IHandler get dragging => __codec5.decode(asJsObject(this)['dragging']);
   IHandler get doubleClickZoom =>
