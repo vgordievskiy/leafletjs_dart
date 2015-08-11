@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-08-07T01:37:14.822Z
+// 2015-08-09T01:02:50.094Z
 
 part of leafletjs_dart.bind.map;
 

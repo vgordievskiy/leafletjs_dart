@@ -142,6 +142,9 @@ class Leafletjs extends PolymerElement {
       notifyChange(evt);
       asyncDeliverChanges();
     });
+    map.on('resize', (JsObject e){
+      Invalidatesize();
+    });
   }
   
   _initMarkerListener(L.Marker marker) {
