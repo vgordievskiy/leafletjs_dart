@@ -51,7 +51,6 @@ class MapHelpers {
 
 @CustomTag('leafletjs-map')
 class Leafletjs extends PolymerElement {
-  static var SpbCoord = [59.95, 30.3];
   
   Leafletjs.created() : super.created();
 
@@ -60,6 +59,9 @@ class Leafletjs extends PolymerElement {
   
   @observable
   String map_type = "OSM";
+  @observable
+  List<double> start_point = [0.0, 0.0];
+  
   
   @reflectable
   L.LatLng Center;
@@ -90,7 +92,7 @@ class Leafletjs extends PolymerElement {
   _initMap() {
     var targetElement = $['leafletjs-map'];
     var params = {
-      'center' : new JsObject.jsify(SpbCoord),
+      'center' : new JsObject.jsify(start_point),
       'zoom'   : 10
     };
     map = new L.LeafletMap(targetElement, toJs(params));
