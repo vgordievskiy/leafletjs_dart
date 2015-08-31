@@ -17,6 +17,7 @@ export 'leafletjs_js_bindings/Util.dart';
 
 import 'leafletjs_js_bindings/map.dart' as L;
 import 'leafletjs_js_bindings/ILayer.dart' as L;
+import 'leafletjs_js_bindings/IHandler.dart' as L;
 import 'leafletjs_js_bindings/TileLayer.dart' as L;
 import 'leafletjs_js_bindings/Marker.dart' as L;
 import 'leafletjs_js_bindings/Icon.dart' as L;
@@ -99,7 +100,6 @@ class Leafletjs extends PolymerElement {
     mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
     
     if(map.tap!= null) map.tap.disable();
-    if(map.doubleClickZoom!=null) map.doubleClickZoom.disable();
     
     new Future(() =>map.invalidateSize());
   }
@@ -211,5 +211,13 @@ class Leafletjs extends PolymerElement {
   void ClearAllMarkers() {
     _markersGroup.clearLayers();
   }
+  
+  L.IHandler get dragging => map.dragging;
+  L.IHandler get doubleClickZoom => map.doubleClickZoom;
+  L.IHandler get scrollWheelZoom => map.scrollWheelZoom;
+  L.IHandler get boxZoom => map.boxZoom;
+  L.IHandler get keyboard => map.keyboard;
+  L.IHandler get tap => map.tap;
+  L.IHandler get touchZoom => map.touchZoom;
 
 }
