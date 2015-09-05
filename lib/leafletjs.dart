@@ -151,6 +151,11 @@ class Leafletjs extends PolymerElement {
       notifyChange(evt);
       asyncDeliverChanges();
     });
+    map.on('zoomlevelschange', (JsObject e){
+      L.MapEvent evt = new L.MapEvent.fromJs('zoomlevelschange');
+      notifyChange(evt);
+      asyncDeliverChanges();
+    });
     map.on('resize', (JsObject e){
       Invalidatesize();
     });
