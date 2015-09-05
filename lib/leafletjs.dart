@@ -9,6 +9,7 @@ import 'package:js_wrapping/js_wrapping.dart';
 
 export 'Events/MouseEvent.dart';
 export 'Events/MarkerEvent.dart';
+export 'Events/MapEvent.dart';
 export 'leafletjs_js_bindings/geo.dart';
 export 'leafletjs_js_bindings/Icon.dart';
 export 'leafletjs_js_bindings/Marker.dart';
