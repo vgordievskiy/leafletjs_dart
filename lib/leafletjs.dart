@@ -10,6 +10,7 @@ import 'package:js_wrapping/js_wrapping.dart';
 export 'Events/MouseEvent.dart';
 export 'Events/MarkerEvent.dart';
 export 'Events/MapEvent.dart';
+export 'Events/TileLayerEvent.dart';
 export 'leafletjs_js_bindings/geo.dart';
 export 'leafletjs_js_bindings/Icon.dart';
 export 'leafletjs_js_bindings/Marker.dart';
@@ -27,6 +28,7 @@ import 'leafletjs_js_bindings/Util.dart' as L;
 import 'Events/MouseEvent.dart' as L;
 import 'Events/MarkerEvent.dart' as L;
 import 'Events/MapEvent.dart' as L;
+import 'Events/TileLayerEvent.dart' as L;
 
 JsObject toJs(var obj){
  if (obj is JsInterface) return asJsObject(obj);
@@ -158,6 +160,11 @@ class Leafletjs extends PolymerElement {
     });
     map.on('resize', (JsObject e){
       Invalidatesize();
+    });
+    mapLayer.on('load', (JsObject e){
+      L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load');
+      notifyChange(evt);
+      asyncDeliverChanges();
     });
   }
   
