@@ -25,6 +25,7 @@ import 'leafletjs_js_bindings/geo.dart' as L;
 import 'leafletjs_js_bindings/Util.dart' as L;
 import 'Events/MouseEvent.dart' as L;
 import 'Events/MarkerEvent.dart' as L;
+import 'Events/MapEvent.dart' as L;
 
 JsObject toJs(var obj){
  if (obj is JsInterface) return asJsObject(obj);
@@ -141,6 +142,11 @@ class Leafletjs extends PolymerElement {
     });
     map.on('click', (JsObject e){
       L.MouseEvent evt = new L.MouseEvent.fromJs('click', e['latlng']);
+      notifyChange(evt);
+      asyncDeliverChanges();
+    });
+    map.on('viewreset', (JsObject e){
+      L.MapEvent evt = new L.MapEvent.fromJs('viewreset');
       notifyChange(evt);
       asyncDeliverChanges();
     });
