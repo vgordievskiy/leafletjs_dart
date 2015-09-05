@@ -162,7 +162,7 @@ class Leafletjs extends PolymerElement {
       Invalidatesize();
     });
     mapLayer.on('load', (JsObject e){
-      L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load');
+      L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load', 'baseMap');
       notifyChange(evt);
       asyncDeliverChanges();
     });
