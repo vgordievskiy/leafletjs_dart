@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-22T00:41:04.349Z
+// 2015-09-18T15:48:26.240Z
 
 part of leafletjs_dart.bind.core;
 
@@ -13,4 +13,6 @@ class Evented extends JsInterface implements _Evented {
   Evented() : this.created(new JsObject(context['L']['Evented']));
   on(String type, Function listener) =>
       asJsObject(this).callMethod('on', [type, listener]);
+  off(String type, Function listener) =>
+      asJsObject(this).callMethod('off', [type, listener]);
 }

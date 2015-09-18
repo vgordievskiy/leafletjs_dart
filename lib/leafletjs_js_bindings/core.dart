@@ -9,4 +9,5 @@ part 'core.g.dart';
 abstract class _Evented implements JsInterface  {
   external factory _Evented();
   on(String type, Function listener);
+  off(String type, Function listener);
 }
