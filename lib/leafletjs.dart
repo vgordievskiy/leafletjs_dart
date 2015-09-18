@@ -174,12 +174,18 @@ class Leafletjs extends PolymerElement {
     });
   }
   
-  void SetCenter(L.LatLng pnt) {
+  Future SetCenter(L.LatLng pnt) {
+    Completer comp = new Completer();
+    map.once('moveend', (_) => comp.complete());
     map.setView(pnt);
+    return comp.future;
   }
   
-  void SetZoom(int number) {
+  Future SetZoom(int number) {
+    Completer comp = new Completer();
+    map.once('zoomend', (_) => comp.complete());
     map.setZoom(number);
+    return comp.future;
   }
   
   int GetZoom() => map.getZoom();
