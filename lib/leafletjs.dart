@@ -124,6 +124,12 @@ class Leafletjs extends PolymerElement {
     _markersGroup = new L.LayerGroup(toJs([]))..addTo(map);
   }
   
+  _fireMapEvent(String name) {
+    L.MapEvent evt = new L.MapEvent.fromJs(name);
+    notifyChange(evt);
+    asyncDeliverChanges();
+  }
+  
   void _InitListeners() {
     map.on('moveend', (var e){
       { /*Notify of visible region are changed*/
@@ -148,19 +154,11 @@ class Leafletjs extends PolymerElement {
       notifyChange(evt);
       asyncDeliverChanges();
     });
-    map.on('viewreset', (JsObject e){
-      L.MapEvent evt = new L.MapEvent.fromJs('viewreset');
-      notifyChange(evt);
-      asyncDeliverChanges();
-    });
-    map.on('zoomlevelschange', (JsObject e){
-      L.MapEvent evt = new L.MapEvent.fromJs('zoomlevelschange');
-      notifyChange(evt);
-      asyncDeliverChanges();
-    });
-    map.on('resize', (JsObject e){
-      Invalidatesize();
-    });
+    map.on('viewreset', (JsObject e) => _fireMapEvent('viewreset'));
+    map.on('zoomlevelschange', (JsObject e) => _fireMapEvent('zoomlevelschange'));
+    map.on('resize', (JsObject e) =>  Invalidatesize());
+    map.on('zoomstart', (JsObject e) => _fireMapEvent('zoomstart'));
+    map.on('zoomend', (JsObject e) => _fireMapEvent('zoomend'));
     mapLayer.on('load', (JsObject e){
       L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load', 'baseMap');
       notifyChange(evt);

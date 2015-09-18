@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-08-14T22:45:08.096Z
+// 2015-08-26T12:21:28.035Z
 
 part of leafletjs_dart.bind.Marker;
 
