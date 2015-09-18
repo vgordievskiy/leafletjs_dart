@@ -183,6 +183,9 @@ class Leafletjs extends PolymerElement {
   
   Future SetZoom(int number) {
     Completer comp = new Completer();
+    if(number == map.getZoom()) {
+      return new Future.value();
+    }
     map.once('zoomend', (_) => comp.complete());
     map.setZoom(number);
     return comp.future;
