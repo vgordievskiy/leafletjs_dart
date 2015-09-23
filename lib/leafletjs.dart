@@ -176,6 +176,9 @@ class Leafletjs extends PolymerElement {
   
   Future SetCenter(L.LatLng pnt) {
     Completer comp = new Completer();
+    if(Comparable  == pnt) {
+      return new Future.value();
+    }
     map.once('moveend', (_) => comp.complete());
     map.setView(pnt);
     return comp.future;
