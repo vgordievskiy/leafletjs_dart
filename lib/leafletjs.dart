@@ -55,14 +55,6 @@ class MapHelpers {
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
 }
 
-bool compareGeoPnt(L.LatLng l, L.LatLng r, int count) {
-  double prec = 9/pow(10, count);
-  double t1 = l.lat.abs() - r.lat.abs();
-  double t2 = l.lng.abs() - r.lng.abs();
-  return (l.lat.abs() - r.lat.abs()).abs() < prec &&
-         (l.lng.abs() - r.lng.abs()).abs() < prec;
-}
-
 @CustomTag('leafletjs-map')
 class Leafletjs extends PolymerElement {
   
@@ -185,7 +177,7 @@ class Leafletjs extends PolymerElement {
   
   Future SetCenter(L.LatLng pnt) {
     Completer comp = new Completer();
-    if(compareGeoPnt(Center, pnt, 6)) {
+    if(L.compareGeoPnt(Center, pnt, 6)) {
       return new Future.value();
     }
     map.once('moveend', (_) {

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-09-23T01:31:16.700Z
+// 2015-09-23T02:06:52.291Z
 
 part of leafletjs_dart.bind.geo;
 
