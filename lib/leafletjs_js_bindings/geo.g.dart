@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-09-23T01:13:33.333Z
+// 2015-09-23T01:31:16.700Z
 
 part of leafletjs_dart.bind.geo;
 
@@ -18,10 +18,15 @@ class LatLng extends JsInterface implements _LatLng {
   double get lat => asJsObject(this)['lat'];
   double get lng => asJsObject(this)['lng'];
 
+  bool equals(LatLng other) =>
+      asJsObject(this).callMethod('equals', [__codec2.encode(other)]);
+
   bool operator ==(LatLng other) {
-    return lat.compareTo(other.lat) == 0 && lng.compareTo(other.lng) == 0;
+    return this.equals(other);
   }
 }
+/// codec for leafletjs_dart.bind.geo.LatLng
+final __codec2 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
 
 // **************************************************************************
 // Generator: JsInterfaceGenerator
@@ -45,5 +50,3 @@ class LatLngBounds extends JsInterface implements _LatLngBounds {
   LatLng getSouthEast() =>
       __codec2.decode(asJsObject(this).callMethod('getSouthEast'));
 }
-/// codec for leafletjs_dart.bind.geo.LatLng
-final __codec2 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
