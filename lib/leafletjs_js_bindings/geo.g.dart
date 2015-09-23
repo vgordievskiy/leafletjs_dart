@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-07-24T16:06:30.868Z
+// 2015-09-23T00:24:55.551Z
 
 part of leafletjs_dart.bind.geo;
 
@@ -17,6 +17,10 @@ class LatLng extends JsInterface implements _LatLng {
       : this.created(new JsObject(context['L']['LatLng'], [lat, lnt, alt]));
   double get lat => asJsObject(this)['lat'];
   double get lng => asJsObject(this)['lng'];
+
+  bool operator ==(LatLng other) {
+    return lat.compareTo(other.lat) == 0 && lng.compareTo(other.lng) == 0;
+  }
 }
 
 // **************************************************************************
@@ -28,18 +32,18 @@ class LatLngBounds extends JsInterface implements _LatLngBounds {
   LatLngBounds.created(JsObject o) : super.created(o);
   LatLngBounds(LatLng SW, LatLng NE) : this.created(new JsObject(
           context['L']['LatLngBounds'], [
-        __codec18.encode(SW),
-        __codec18.encode(NE)
+        __codec2.encode(SW),
+        __codec2.encode(NE)
       ]));
   bool isValid() => asJsObject(this).callMethod('isValid');
   LatLng getSouthWest() =>
-      __codec18.decode(asJsObject(this).callMethod('getSouthWest'));
+      __codec2.decode(asJsObject(this).callMethod('getSouthWest'));
   LatLng getNorthEast() =>
-      __codec18.decode(asJsObject(this).callMethod('getNorthEast'));
+      __codec2.decode(asJsObject(this).callMethod('getNorthEast'));
   LatLng getNorthWest() =>
-      __codec18.decode(asJsObject(this).callMethod('getNorthWest'));
+      __codec2.decode(asJsObject(this).callMethod('getNorthWest'));
   LatLng getSouthEast() =>
-      __codec18.decode(asJsObject(this).callMethod('getSouthEast'));
+      __codec2.decode(asJsObject(this).callMethod('getSouthEast'));
 }
 /// codec for leafletjs_dart.bind.geo.LatLng
-final __codec18 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));
+final __codec2 = new JsInterfaceCodec<LatLng>((o) => new LatLng.created(o));

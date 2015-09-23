@@ -13,6 +13,11 @@ abstract class _LatLng implements JsInterface  {
   external factory _LatLng(double lat, double lnt, [double alt = null]);
   double get lat;
   double get lng;
+  
+  bool operator==(LatLng other) {
+    return lat.compareTo(other.lat) == 0 &&
+           lng.compareTo(other.lng) == 0;
+  }
 }
 
 abstract class _LatLngBounds implements JsInterface {
