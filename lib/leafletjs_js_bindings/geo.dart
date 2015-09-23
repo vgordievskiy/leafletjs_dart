@@ -15,8 +15,7 @@ abstract class _LatLng implements JsInterface  {
   double get lng;
   
   bool operator==(LatLng other) {
-    return lat.compareTo(other.lat) == 0 &&
-           lng.compareTo(other.lng) == 0;
+    return lat.compareTo(other.lat) == 0 && lng.compareTo(other.lng) == 0;
   }
 }
 

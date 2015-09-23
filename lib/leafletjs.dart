@@ -176,11 +176,19 @@ class Leafletjs extends PolymerElement {
   
   Future SetCenter(L.LatLng pnt) {
     Completer comp = new Completer();
-    if(Center  == pnt) {
+    if(Center == pnt) {
       return new Future.value();
     }
-    map.once('moveend', (_) => comp.complete());
-    map.setView(pnt);
+    map.once('moveend', (_) {
+      { /*Notify of center are changed*/
+        L.LatLng newCenter = map.getCenter();
+        notifyPropertyChange(#Center, Center, newCenter);
+        Center = newCenter;
+      }
+      asyncDeliverChanges();
+      comp.complete();
+    });
+    map.panTo(pnt);
     return comp.future;
   }
   
