@@ -20,6 +20,7 @@ abstract class _LeafletMap extends Evented implements JsInterface  {
   
   setView(LatLng center);
   setZoom(int number);
+  int getZoom();
   addLayer(ILayer layer);
   removeLayer(ILayer layer);
   bool hasLayer(ILayer layer);
