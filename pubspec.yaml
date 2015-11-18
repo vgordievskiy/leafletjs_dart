@@ -16,7 +16,12 @@ dev_dependencies:
     version: '>=0.2.0'
 transformers:
 - web_components:
-    entry_points: -web/index.html
+    entry_points: web/index.html
 - reflectable:
-    entry_points:
-    - web/index.dart
+    entry_points: web/index.bootstrap.initialize.dart
+- $dart2js:
+    $include: '**/*.bootstrap.initialize.dart'
+    minify: true
+    commandLineOptions:
+    - --trust-type-annotations
+    - --trust-primitives
