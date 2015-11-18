@@ -1,3 +1,4 @@
+@HtmlImport('leafletjs.html')
 library leafletjs_dart;
 
 import 'dart:html';
@@ -6,6 +7,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:polymer/polymer.dart';
+import 'package:web_components/web_components.dart';
 import 'package:js_wrapping/js_wrapping.dart';
 
 export 'Events/MouseEvent.dart';
@@ -55,7 +57,7 @@ class MapHelpers {
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
 }
 
-@CustomTag('leafletjs-map')
+@PolymerRegister('leafletjs-map')
 class Leafletjs extends PolymerElement {
   
   Leafletjs.created() : super.created();
@@ -63,9 +65,9 @@ class Leafletjs extends PolymerElement {
   L.LeafletMap map;
   L.TileLayer mapLayer;
   
-  @observable
-  String map_type = "OSM";
-  @observable
+  @property
+  String map_type = "";
+  @property
   List<double> start_point = [0.0, 0.0];
   
   
@@ -79,7 +81,6 @@ class Leafletjs extends PolymerElement {
   L.LayerGroup _markersGroup;
   
   ready() {
-    super.ready();
     _initMap();
     _InitDefaultIconStyle();
     _InitMarkerLayers();
