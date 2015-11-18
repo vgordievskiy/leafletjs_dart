@@ -6,6 +6,7 @@ import 'dart:js';
 import 'dart:async';
 import 'dart:math';
 
+import 'package:observe/observe.dart' as observe;
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 import 'package:js_wrapping/js_wrapping.dart';
@@ -58,7 +59,7 @@ class MapHelpers {
 }
 
 @PolymerRegister('leafletjs-map')
-class Leafletjs extends PolymerElement {
+class Leafletjs extends PolymerElement with observe.Observable {
   
   Leafletjs.created() : super.created();
 
@@ -89,7 +90,7 @@ class Leafletjs extends PolymerElement {
   
   attached() {
     super.attached();
-    shadowRoot.append(
+    this.append(
       new StyleElement()..text = "@import '${map_css}';"
     );
   }
