@@ -10,6 +10,7 @@ dependencies:
   reflectable: any
   source_gen: '>=0.4.0'
   web_components: any
+  dart_to_js_script_rewriter: any
 dev_dependencies:
   js_wrapping:
     git: https://github.com/vgordievskiy/dart-js-wrapping.git
@@ -25,3 +26,4 @@ transformers:
     commandLineOptions:
     - --trust-type-annotations
     - --trust-primitives
+- dart_to_js_script_rewriter
