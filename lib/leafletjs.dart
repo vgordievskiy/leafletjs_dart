@@ -67,7 +67,7 @@ class Leafletjs extends PolymerElement with observe.Observable {
   L.TileLayer mapLayer;
   
   @property
-  String map_type = "";
+  String map_type = "OSM";
   @property
   List<double> start_point = [0.0, 0.0];
   

@@ -1,23 +1,22 @@
 name: leafletjs
-version: 0.0.1
+version: 0.0.2
 description: Dart wrapper for leafletjs map
 environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
   browser: any
   observe: any
-  web_components: ^0.12.0
-  reflectable: ^0.3.0
   polymer: 1.0.0-rc.6
+  reflectable: any
   source_gen: '>=0.4.0'
+  web_components: any
 dev_dependencies:
   js_wrapping:
     git: https://github.com/vgordievskiy/dart-js-wrapping.git
     version: '>=0.2.0'
 transformers:
 - web_components:
-    entry_points: 
-        -web/index.html
+    entry_points: -web/index.html
 - reflectable:
     entry_points:
-        - web/index.dart
+    - web/index.dart
