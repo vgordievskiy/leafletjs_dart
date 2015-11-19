@@ -11,7 +11,6 @@ dependencies:
   source_gen: '>=0.4.0'
   web_components: any
   dart_to_js_script_rewriter: any
-dev_dependencies:
   js_wrapping:
     git: https://github.com/vgordievskiy/dart-js-wrapping.git
     version: '>=0.2.0'
