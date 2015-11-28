@@ -6,7 +6,7 @@ environment:
 dependencies:
   browser: any
   observe: any
-  polymer: 1.0.0-rc.6
+  polymer: ^1.0.0-rc.6
   reflectable: any
   source_gen: '>=0.4.0'
   web_components: any
