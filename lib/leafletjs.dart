@@ -51,7 +51,10 @@ class MapHelpers {
                                                                   </a>
                                                                   &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>''' })),
     'OSM-Night' : () => new L.TileLayer('http://{s}.tile.osm.kosmosnimki.ru/night/{z}/{x}/{y}.png',
-                                         toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' }))
+                                         toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> and http://kosmosnimki.ru contributors' })),
+    'CartoDB-Dark' : () => new  L.TileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+                                           L.toJs({ 'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                                                    'subdomains': 'abcd'}))                                     
   }; 
 
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
