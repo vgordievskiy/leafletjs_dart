@@ -49,7 +49,9 @@ class MapHelpers {
                                                                   <a href="http://giscience.uni-hd.de/">
                                                                     GIScience Research Group @ University of Heidelberg
                                                                   </a>
-                                                                  &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>''' }))
+                                                                  &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>''' })),
+    'OSM-Night' : () => new L.TileLayer('http://{s}.tile.osm.kosmosnimki.ru/night/{z}/{x}/{y}.png',
+                                         toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' }))
   }; 
 
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
