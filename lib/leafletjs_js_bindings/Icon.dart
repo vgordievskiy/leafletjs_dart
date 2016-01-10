@@ -1,11 +1,10 @@
-@JsName('L')
+@JS('L')
 library leafletjs_dart.bind.Icon;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'dart:js';
+import 'package:js/js.dart';
 
-part 'Icon.g.dart';
-
-abstract class _Icon implements JsInterface  {
-  external factory _Icon(JsObject params);
+@JS()
+class Icon {
+  external factory Icon(JsObject params);
 }

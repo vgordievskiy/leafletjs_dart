@@ -1,8 +1,8 @@
-@JsName('L')
+@JS('L')
 library leafletjs_dart.bind.map;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'dart:js';
+import 'package:js/js.dart';
 
 import 'core.dart';
 import 'geo.dart';
@@ -10,31 +10,30 @@ import 'geo.dart';
 import 'ILayer.dart';
 import 'IHandler.dart';
 
-part 'map.g.dart';
 
-@JsName('Map')
-abstract class _LeafletMap extends Evented implements JsInterface  {
-  external factory _LeafletMap(var target, JsObject params);
-  LatLng getCenter();
-  LatLngBounds getBounds();
+@JS('Map')
+class LeafletMap extends Evented {
+  external factory LeafletMap(var target, JsObject params);
+  external LatLng getCenter();
+  external LatLngBounds getBounds();
   
-  setView(LatLng center);
-  setZoom(int number);
-  panTo(LatLng center);
-  int getZoom();
-  addLayer(ILayer layer);
-  removeLayer(ILayer layer);
-  bool hasLayer(ILayer layer);
+  external setView(LatLng center);
+  external setZoom(int number);
+  external panTo(LatLng center);
+  external int getZoom();
+  external addLayer(ILayer layer);
+  external removeLayer(ILayer layer);
+  external bool hasLayer(ILayer layer);
   
-  invalidateSize({bool animate : false});
-  @JsName('invalidateSize')
-      invalidateSizeWithParams(JsObject params);
+  external invalidateSize();
+  @JS('invalidateSize')
+  external invalidateSizeWithParams(JsObject params);
   
-  IHandler get dragging;
-  IHandler get doubleClickZoom;
-  IHandler get scrollWheelZoom;
-  IHandler get boxZoom;
-  IHandler get keyboard;
-  IHandler get tap;
-  IHandler get touchZoom;
+  external IHandler get dragging;
+  external IHandler get doubleClickZoom;
+  external IHandler get scrollWheelZoom;
+  external IHandler get boxZoom;
+  external IHandler get keyboard;
+  external IHandler get tap;
+  external IHandler get touchZoom;
 }

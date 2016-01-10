@@ -5,7 +5,6 @@ import '../leafletjs_js_bindings/geo.dart' as L;
 import '../leafletjs_js_bindings/Marker.dart' as L;
 import '../leafletjs_js_bindings/Util.dart' as L;
 
-import 'package:js_wrapping/js_wrapping.dart';
 import 'package:observe/observe.dart';
 
 class MapEvent extends ChangeRecord {

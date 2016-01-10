@@ -1,6 +1,5 @@
 library leafletjs_dart.Events.TileLayerEvents;
 
-import 'package:js_wrapping/js_wrapping.dart';
 import 'package:observe/observe.dart';
 
 class TileLayerEvent extends ChangeRecord {

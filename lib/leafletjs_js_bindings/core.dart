@@ -1,15 +1,14 @@
-@JsName('L')
+@JS('L')
 library leafletjs_dart.bind.core;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'package:js/js.dart';
 
-part 'core.g.dart';
-
-abstract class _Evented implements JsInterface  {
-  external factory _Evented();
-  on(String type, Function listener);
-  off(String type, Function listener);
-  once(String type, Function listener);
-  clearAllEventListeners();
+@JS()
+@anonymous
+class Evented {
+  external factory Evented();
+  external on(String type, Function listener);
+  external off(String type, Function listener);
+  external once(String type, Function listener);
+  external clearAllEventListeners();
 }

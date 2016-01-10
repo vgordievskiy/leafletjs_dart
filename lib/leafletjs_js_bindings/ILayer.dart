@@ -1,26 +1,25 @@
-@JsName('L')
+@JS('L')
 library leafletjs_dart.bind.ILayer;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'dart:js';
+import 'package:js/js.dart';
 
 import 'core.dart';
 import 'map.dart';
 
-part 'ILayer.g.dart';
+@JS()
+class ILayer {}
 
-abstract class _ILayer implements JsInterface {
-}
-
-abstract class _LayerGroup implements JsInterface {
-  external factory _LayerGroup(JsArray layers);
-  addTo(LeafletMap map);
-  addLayer(ILayer layer);
-  removeLayer(ILayer layer);
-  @JsName('removeLayer')
-    removeLayerById(String id);
-  bool hasLayer(ILayer layer);
-  ILayer getLayer(String id);
-  List<ILayer> getLayers();
-  clearLayers();
+@JS()
+class LayerGroup {
+  external factory LayerGroup(JsArray layers);
+  external addTo(LeafletMap map);
+  external addLayer(ILayer layer);
+  external removeLayer(ILayer layer);
+  @JS('removeLayer')
+  external removeLayerById(String id);
+  external bool hasLayer(ILayer layer);
+  external ILayer getLayer(String id);
+  external List<ILayer> getLayers();
+  external clearLayers();
 }

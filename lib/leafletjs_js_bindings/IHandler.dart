@@ -1,14 +1,12 @@
-@JsName('L')
+@JS('L')
 library leafletjs_dart.bind.IHandler;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'package:js/js.dart';
 
-part 'IHandler.g.dart';
-
-abstract class _IHandler implements JsInterface  {
-  external factory _IHandler();
-  enable();
-  disable();
-  bool enabled();
+@JS()
+class IHandler {
+  external factory IHandler();
+  external enable();
+  external disable();
+  external bool enabled();
 }

@@ -5,12 +5,9 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
   browser: any
+  js: any
+  observe: any
   polymer: any
-  source_gen: '>=0.4.0'
-dev_dependencies:
-  js_wrapping:
-    git: https://github.com/vgordievskiy/dart-js-wrapping.git
-    version: '>=0.2.0'
 transformers:
 - polymer:
     entry_points: web/index.html

@@ -1,8 +1,8 @@
-@JsName('L.Util')
+@JS('L.Util')
 library leafletjs_dart.bind.Util;
 
-import 'dart:html';
-import 'package:js_wrapping/js_wrapping.dart';
+import 'dart:js';
+import 'package:js/js.dart';
 
 int stamp(JsObject obj) {
   JsFunction cntx = context['L']['Util']['stamp'];
@@ -15,6 +15,5 @@ String toJSON(JsObject obj) {
 }
 
 JsObject toJs(var obj){
- if (obj is JsInterface) return asJsObject(obj);
  return new JsObject.jsify(obj);
 }
