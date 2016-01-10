@@ -1,4 +1,4 @@
-@JS('L')
+@JS('Leaflet')
 library leafletjs_dart.bind.map;
 
 import 'dart:js';
@@ -10,10 +10,9 @@ import 'geo.dart';
 import 'ILayer.dart';
 import 'IHandler.dart';
 
-
 @JS('Map')
-class LeafletMap extends Evented {
-  external factory LeafletMap(var target, JsObject params);
+class GMap extends Evented {
+  external factory GMap(var target, JsObject params);
   external LatLng getCenter();
   external LatLngBounds getBounds();
   
@@ -37,3 +36,6 @@ class LeafletMap extends Evented {
   external IHandler get tap;
   external IHandler get touchZoom;
 }
+
+@JS()
+external GMap map(var target, JsObject params);

@@ -1,10 +1,10 @@
-@JS('L')
+@JS('Leaflet')
 library leafletjs_dart.bind.core;
 
 import 'package:js/js.dart';
 
-@JS()
 @anonymous
+@JS()
 class Evented {
   external factory Evented();
   external on(String type, Function listener);

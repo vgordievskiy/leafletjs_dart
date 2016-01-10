@@ -1,4 +1,4 @@
-@JS('L')
+@JS('Leaflet')
 library leafletjs_dart.bind.IHandler;
 
 import 'package:js/js.dart';

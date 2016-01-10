@@ -40,17 +40,17 @@ final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
-    'OSM' : () => new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+    'OSM' : () => L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                                    toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' })),
-    'OSM-Surfer' :() => new L.TileLayer('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
+    'OSM-Surfer' :() =>  L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
                                         toJs({ 'attribution' : '''Imagery from
                                                                   <a href="http://giscience.uni-hd.de/">
                                                                     GIScience Research Group @ University of Heidelberg
                                                                   </a>
                                                                   &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>''' })),
-    'OSM-Night' : () => new L.TileLayer('http://{s}.tile.osm.kosmosnimki.ru/night/{z}/{x}/{y}.png',
+    'OSM-Night' : () =>  L.tileLayer('http://{s}.tile.osm.kosmosnimki.ru/night/{z}/{x}/{y}.png',
                                          toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> and http://kosmosnimki.ru contributors' })),
-    'CartoDB-Dark' : () => new  L.TileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+    'CartoDB-Dark' : () =>  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
                                            L.toJs({ 'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                                                     'subdomains': 'abcd'}))                                     
   }; 
@@ -63,7 +63,7 @@ class Leafletjs extends PolymerElement {
   
   Leafletjs.created() : super.created();
 
-  L.LeafletMap map;
+  L.GMap map;
   L.TileLayer mapLayer;
   
   @observable
@@ -99,12 +99,13 @@ class Leafletjs extends PolymerElement {
   asyncDeliverChanges() async => deliverChanges();
   
   _initMap() {
+    context['Leaflet'] = context['L'].callMethod('noConflict');
     var targetElement = $['leafletjs-map'];
     var params = {
       'center' : new JsObject.jsify(start_point),
       'zoom'   : 10
     };
-    map = new L.LeafletMap(targetElement, toJs(params));
+    map = L.map(targetElement, toJs(params));
     mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
     
     if(map.tap!= null) map.tap.disable();

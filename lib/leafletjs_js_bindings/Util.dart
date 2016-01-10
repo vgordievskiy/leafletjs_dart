@@ -1,11 +1,11 @@
-@JS('L.Util')
+@JS('Leaflet.Util')
 library leafletjs_dart.bind.Util;
 
 import 'dart:js';
 import 'package:js/js.dart';
 
 int stamp(JsObject obj) {
-  JsFunction cntx = context['L']['Util']['stamp'];
+  JsFunction cntx = context['Leaflet']['Util']['stamp'];
   return cntx.apply([obj]);
 }
 

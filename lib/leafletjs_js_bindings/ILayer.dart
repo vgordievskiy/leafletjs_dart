@@ -1,11 +1,11 @@
-@JS('L')
+@JS('Leaflet')
 library leafletjs_dart.bind.ILayer;
 
 import 'dart:js';
 import 'package:js/js.dart';
 
 import 'core.dart';
-import 'map.dart';
+import 'map.dart' as L;
 
 @JS()
 class ILayer {}
@@ -13,7 +13,7 @@ class ILayer {}
 @JS()
 class LayerGroup {
   external factory LayerGroup(JsArray layers);
-  external addTo(LeafletMap map);
+  external addTo(L.GMap map);
   external addLayer(ILayer layer);
   external removeLayer(ILayer layer);
   @JS('removeLayer')
