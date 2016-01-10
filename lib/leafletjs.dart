@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:polymer/polymer.dart';
-import 'package:js_wrapping/js_wrapping.dart';
 
 export 'Events/MouseEvent.dart';
 export 'Events/MarkerEvent.dart';
@@ -32,7 +31,6 @@ import 'Events/MapEvent.dart' as L;
 import 'Events/TileLayerEvent.dart' as L;
 
 JsObject toJs(var obj){
- if (obj is JsInterface) return asJsObject(obj);
  return new JsObject.jsify(obj);
 }
 
@@ -238,13 +236,13 @@ class Leafletjs extends PolymerElement {
   }
   
   L.Marker GetMarker(int id) {
-    return new L.Marker.created(toJs(_markersGroup.getLayer("$id")));
+    return _markersGroup.getLayer("$id");
   }
   
   Map<int, L.Marker> GetMarkers() {
     Map<int, L.Marker> ret = new Map();
     for(L.ILayer layer in _markersGroup.getLayers()) {
-      ret[L.stamp(toJs(layer))] = new L.Marker.created(toJs(layer));
+      ret[L.stamp(toJs(layer))] = layer;
     }
     return ret;
   }
