@@ -12,7 +12,7 @@ class ILayer {}
 
 @JS()
 class LayerGroup {
-  external factory LayerGroup(JsArray layers);
+  external factory LayerGroup(List<ILayer> layers);
   external addTo(L.GMap map);
   external addLayer(ILayer layer);
   external removeLayer(ILayer layer);

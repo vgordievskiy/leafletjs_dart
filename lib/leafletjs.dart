@@ -119,16 +119,16 @@ class Leafletjs extends PolymerElement {
     /*Init marker style*/
     ImageElement image =  new ImageElement(src: _leafletDefMarker);
     image.onLoad.listen((var el){
-      defMarkerIcon = new L.Icon(toJs({
-        'iconUrl' : _leafletDefMarker,
-        'iconAnchor': toJs([image.width ~/ 2, image.height]),
-        'popupAnchor': toJs([image.width ~/(-2), image.height*(-1)])
-      }));
+      defMarkerIcon = new L.Icon(new L.IconOptions(
+        iconUrl :_leafletDefMarker,
+        iconAnchor: [image.width ~/ 2, image.height],
+        popupAnchor: [image.width ~/(-2), image.height*(-1)]
+      ));
     });
   }
   
   void _InitMarkerLayers() {
-    _markersGroup = new L.LayerGroup(toJs([]))..addTo(map);
+    _markersGroup = new L.LayerGroup([])..addTo(map);
   }
   
   _fireMapEvent(String name) {
@@ -226,12 +226,10 @@ class Leafletjs extends PolymerElement {
     L.Icon usedIcon = icon != null ? icon : defMarkerIcon;
     L.Marker marker = new L.Marker(
       pnt,
-      toJs({
-        'icon'  : toJs(usedIcon),
-        'title' : title
-    }));
+      new L.MarkerOptions(icon: usedIcon, title: title)
+    );
     
-    if (popup!=null)  marker.bindPopup(popup ,toJs({}));
+    if (popup!=null)  marker.bindPopup(popup , new L.PopupOptions());
     
     _markersGroup.addLayer(marker);
     _initMarkerListener(marker);
