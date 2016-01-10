@@ -41,18 +41,20 @@ final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
     'OSM' : () => L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                                   toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' })),
+                               new L.TileOptions(
+                                   attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors')),
     'OSM-Surfer' :() =>  L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
-                                        toJs({ 'attribution' : '''Imagery from
-                                                                  <a href="http://giscience.uni-hd.de/">
-                                                                    GIScience Research Group @ University of Heidelberg
-                                                                  </a>
-                                                                  &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>''' })),
+                                      new L.TileOptions( attribution : '''Imagery from
+                                                         <a href="http://giscience.uni-hd.de/">
+                                                         GIScience Research Group @ University of Heidelberg
+                                                         </a>
+                                                         &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'''
+                                    )),
     'OSM-Night' : () =>  L.tileLayer('http://{s}.tile.osm.kosmosnimki.ru/night/{z}/{x}/{y}.png',
-                                         toJs({ 'attribution': '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> and http://kosmosnimki.ru contributors' })),
+                                     new L.TileOptions( attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> and http://kosmosnimki.ru contributors')),
     'CartoDB-Dark' : () =>  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                                           L.toJs({ 'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                                                    'subdomains': 'abcd'}))                                     
+                                        new L.TileOptions( attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                                                           subdomains: 'abcd'))                                     
   }; 
 
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
@@ -101,11 +103,11 @@ class Leafletjs extends PolymerElement {
   _initMap() {
     context['Leaflet'] = context['L'].callMethod('noConflict');
     var targetElement = $['leafletjs-map'];
-    var params = {
-      'center' : new JsObject.jsify(start_point),
-      'zoom'   : 10
-    };
-    map = L.map(targetElement, toJs(params));
+    L.MapOptions params = new L.MapOptions(
+        center: L.LatLng.FromList(start_point),
+        zoom: 10
+    ); 
+    map = L.map(targetElement, params);
     mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
     
     if(map.tap!= null) map.tap.disable();
@@ -136,7 +138,7 @@ class Leafletjs extends PolymerElement {
   }
   
   void _InitListeners() {
-    map.on('moveend', (var e){
+    map.on('moveend', allowInterop((var e){
       { /*Notify of visible region are changed*/
         L.LatLngBounds newRegion = map.getBounds();
         notifyPropertyChange(#Region, Region, newRegion);
@@ -148,35 +150,35 @@ class Leafletjs extends PolymerElement {
         Center = newCenter;
       }
       asyncDeliverChanges();
-    });
-    map.on('dblclick', (JsObject e){
+    }));
+    map.on('dblclick', allowInterop((JsObject e){
       L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
-    });
-    map.on('click', (JsObject e){
+    }));
+    map.on('click', allowInterop((JsObject e){
       L.MouseEvent evt = new L.MouseEvent.fromJs('click', e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
-    });
-    map.on('viewreset', (JsObject e) => _fireMapEvent('viewreset'));
-    map.on('zoomlevelschange', (JsObject e) => _fireMapEvent('zoomlevelschange'));
-    map.on('resize', (JsObject e) =>  Invalidatesize());
-    map.on('zoomstart', (JsObject e) => _fireMapEvent('zoomstart'));
-    map.on('zoomend', (JsObject e) => _fireMapEvent('zoomend'));
-    mapLayer.on('load', (JsObject e){
+    }));
+    map.on('viewreset', allowInterop((JsObject e) => _fireMapEvent('viewreset')));
+    map.on('zoomlevelschange', allowInterop((JsObject e) => _fireMapEvent('zoomlevelschange')));
+    map.on('resize', allowInterop((JsObject e) =>  Invalidatesize()));
+    map.on('zoomstart', allowInterop((JsObject e) => _fireMapEvent('zoomstart')));
+    map.on('zoomend', allowInterop((JsObject e) => _fireMapEvent('zoomend')));
+    mapLayer.on('load', allowInterop((JsObject e){
       L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load', 'baseMap');
       notifyChange(evt);
       asyncDeliverChanges();
-    });
+    }));
   }
   
   _initMarkerListener(L.Marker marker) {
-    marker.on('click', (JsObject e){
+    marker.on('click', allowInterop((JsObject e){
       L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e['target'], e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
-    });
+    }));
   }
   
   Future SetCenter(L.LatLng pnt) {
@@ -184,7 +186,7 @@ class Leafletjs extends PolymerElement {
     if(L.compareGeoPnt(Center, pnt, 6)) {
       return new Future.value();
     }
-    map.once('moveend', (_) {
+    map.once('moveend', allowInterop((_) {
       { /*Notify of center are changed*/
         L.LatLng newCenter = map.getCenter();
         notifyPropertyChange(#Center, Center, newCenter);
@@ -192,7 +194,7 @@ class Leafletjs extends PolymerElement {
       }
       asyncDeliverChanges();
       comp.complete();
-    });
+    }));
     map.panTo(pnt);
     return comp.future;
   }

@@ -10,9 +10,19 @@ import 'geo.dart';
 import 'ILayer.dart';
 import 'IHandler.dart';
 
+@anonymous
+@JS()
+class MapOptions {
+  external factory MapOptions({
+    List<ILayer> layers,
+    LatLng center,
+    int zoom
+  });
+}
+
 @JS('Map')
 class GMap extends Evented {
-  external factory GMap(var target, JsObject params);
+  external factory GMap(var target, MapOptions params);
   external LatLng getCenter();
   external LatLngBounds getBounds();
   
@@ -38,4 +48,4 @@ class GMap extends Evented {
 }
 
 @JS()
-external GMap map(var target, JsObject params);
+external GMap map(var target, MapOptions params);

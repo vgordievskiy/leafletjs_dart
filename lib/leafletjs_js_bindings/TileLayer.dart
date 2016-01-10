@@ -9,11 +9,20 @@ import 'map.dart' as L;
 
 import "ILayer.dart";
 
+@anonymous
+@JS()
+class TileOptions {
+  external factory TileOptions({
+    String attribution,
+    String subdomains
+  });
+}
+
 @JS()
 class TileLayer extends Evented implements ILayer  {
-  external factory TileLayer(String url, JsObject params);
+  external factory TileLayer(String url, TileOptions params);
   external void addTo(L.GMap map);
 }
 
 @JS()
-external TileLayer tileLayer(String urlTemplate, JsObject params);
+external TileLayer tileLayer(String urlTemplate, TileOptions params);

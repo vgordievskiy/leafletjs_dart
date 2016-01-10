@@ -5,6 +5,7 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
   browser: any
+  func: any
   js: any
   observe: any
   polymer: any
