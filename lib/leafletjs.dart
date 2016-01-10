@@ -30,9 +30,7 @@ import 'Events/MarkerEvent.dart' as L;
 import 'Events/MapEvent.dart' as L;
 import 'Events/TileLayerEvent.dart' as L;
 
-JsObject toJs(var obj){
- return new JsObject.jsify(obj);
-}
+toJs(var obj) => obj;
 
 final String _leafletDefMarker = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/marker-icon.png';
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
@@ -151,22 +149,22 @@ class Leafletjs extends PolymerElement {
       }
       asyncDeliverChanges();
     }));
-    map.on('dblclick', allowInterop((JsObject e){
+    map.on('dblclick', allowInterop((var e){
       L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
-    map.on('click', allowInterop((JsObject e){
+    map.on('click', allowInterop((var e){
       L.MouseEvent evt = new L.MouseEvent.fromJs('click', e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
-    map.on('viewreset', allowInterop((JsObject e) => _fireMapEvent('viewreset')));
-    map.on('zoomlevelschange', allowInterop((JsObject e) => _fireMapEvent('zoomlevelschange')));
-    map.on('resize', allowInterop((JsObject e) =>  Invalidatesize()));
-    map.on('zoomstart', allowInterop((JsObject e) => _fireMapEvent('zoomstart')));
-    map.on('zoomend', allowInterop((JsObject e) => _fireMapEvent('zoomend')));
-    mapLayer.on('load', allowInterop((JsObject e){
+    map.on('viewreset', allowInterop((var e) => _fireMapEvent('viewreset')));
+    map.on('zoomlevelschange', allowInterop((var e) => _fireMapEvent('zoomlevelschange')));
+    map.on('resize', allowInterop((var e) =>  Invalidatesize()));
+    map.on('zoomstart', allowInterop((var e) => _fireMapEvent('zoomstart')));
+    map.on('zoomend', allowInterop((var e) => _fireMapEvent('zoomend')));
+    mapLayer.on('load', allowInterop((var e){
       L.TileLayerEvent evt = new L.TileLayerEvent.fromJs('load', 'baseMap');
       notifyChange(evt);
       asyncDeliverChanges();
@@ -174,7 +172,7 @@ class Leafletjs extends PolymerElement {
   }
   
   _initMarkerListener(L.Marker marker) {
-    marker.on('click', allowInterop((JsObject e){
+    marker.on('click', allowInterop((var e){
       L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e['target'], e['latlng']);
       notifyChange(evt);
       asyncDeliverChanges();
@@ -186,7 +184,7 @@ class Leafletjs extends PolymerElement {
     if(L.compareGeoPnt(Center, pnt, 6)) {
       return new Future.value();
     }
-    map.once('moveend', allowInterop((_) {
+    map.once('moveend', allowInterop((var e) {
       { /*Notify of center are changed*/
         L.LatLng newCenter = map.getCenter();
         notifyPropertyChange(#Center, Center, newCenter);
@@ -204,7 +202,7 @@ class Leafletjs extends PolymerElement {
     if(number == map.getZoom()) {
       return new Future.value();
     }
-    map.once('zoomend', (_) => comp.complete());
+    map.once('zoomend', allowInterop((_) => comp.complete()));
     map.setZoom(number);
     return comp.future;
   }
@@ -233,7 +231,7 @@ class Leafletjs extends PolymerElement {
     
     _markersGroup.addLayer(marker);
     _initMarkerListener(marker);
-    return L.stamp(toJs(marker));
+    return L.stamp(marker);
   }
   
   L.Marker GetMarker(int id) {
@@ -243,7 +241,7 @@ class Leafletjs extends PolymerElement {
   Map<int, L.Marker> GetMarkers() {
     Map<int, L.Marker> ret = new Map();
     for(L.ILayer layer in _markersGroup.getLayers()) {
-      ret[L.stamp(toJs(layer))] = layer;
+      ret[L.stamp(layer)] = layer;
     }
     return ret;
   }
