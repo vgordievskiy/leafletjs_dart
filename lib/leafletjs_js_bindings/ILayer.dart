@@ -16,8 +16,6 @@ class LayerGroup {
   external addTo(L.GMap map);
   external addLayer(ILayer layer);
   external removeLayer(ILayer layer);
-  @JS('removeLayer')
-  external removeLayerById(String id);
   external bool hasLayer(ILayer layer);
   external ILayer getLayer(String id);
   external List<ILayer> getLayers();

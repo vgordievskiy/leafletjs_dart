@@ -247,7 +247,8 @@ class Leafletjs extends PolymerElement {
   }
   
   RemoveMarker(int id) {
-    _markersGroup.removeLayerById("$id");
+    L.ILayer layer = _markersGroup.getLayer("$id");
+    _markersGroup.removeLayer(layer);
   }
   
   void ClearAllMarkers() {
