@@ -62,16 +62,13 @@ class MapHelpers {
 
 @Component(
     selector: 'leafletjs-map',
-    templateUrl: 'leafletjs.html',
-    styleUrls: const ['3pp/leafletjs_0.7.3/leaflet.css']
+    templateUrl: 'leafletjs.html'
+    /*styleUrls: const ['package:leafletjs/3pp/leafletjs_0.7.3/leaflet.css']*/
 )
 class Leafletjs extends Observable implements OnInit {
-  
-  Leafletjs(ElementRef el)
-  {
-    mapContainer = (el.nativeElement as Element).querySelector('#leafletjs-map');
-  }
+  Leafletjs(this.elRef);
 
+  ElementRef elRef;
   DivElement mapContainer;
   
   L.GMap map;
@@ -87,7 +84,9 @@ class Leafletjs extends Observable implements OnInit {
   L.LayerGroup _markersGroup;
   
   @override
-  onInit() {
+  ngOnInit() {
+    mapContainer = (elRef.nativeElement as Element).querySelector('#leafletjs-map');
+   
     var script = loadJs()..onLoad.listen((_){
       _initMap();
       _InitDefaultIconStyle();
