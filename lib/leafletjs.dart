@@ -99,7 +99,10 @@ class Leafletjs extends PolymerElement {
   asyncDeliverChanges() async => deliverChanges();
   
   _initMap() {
-    context['Leaflet'] = context['L'].callMethod('noConflict');
+    try {
+      context['Leaflet'] = context['L'].callMethod('noConflict');
+    } catch(e){}
+
     var targetElement = $['leafletjs-map'];
     L.MapOptions params = new L.MapOptions(
         center: L.LatLng.FromList(start_point),
