@@ -36,6 +36,8 @@ final String _leafletDefMarker = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
 const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
+const String js_src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
+
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
     'OSM' : () => L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
@@ -60,8 +62,8 @@ class MapHelpers {
 
 @Component(
     selector: 'leafletjs-map',
-    templateUrl: 'leafletjs.html'
-    //styleUrls: const ['packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css']
+    templateUrl: 'leafletjs.html',
+    styleUrls: const ['3pp/leafletjs_0.7.3/leaflet.css']
 )
 class Leafletjs extends Observable implements OnInit {
   
@@ -98,7 +100,7 @@ class Leafletjs extends Observable implements OnInit {
   ScriptElement loadJs() {
     ScriptElement script = new ScriptElement();
     script.async = false;
-    script.src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
+    script.src = js_src;
     script.type = "text/javascript";
     return script;
   }
