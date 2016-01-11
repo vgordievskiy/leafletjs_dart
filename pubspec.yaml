@@ -8,7 +8,8 @@ dependencies:
   func: any
   js: any
   observe: any
-  polymer: any
+  angular2: '2.0.0-alpha.46'
 transformers:
-- polymer:
-    entry_points: web/index.html
+- observe
+- angular2:
+    entry_points: web/index.dart

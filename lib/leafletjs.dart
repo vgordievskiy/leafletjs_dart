@@ -3,9 +3,9 @@ library leafletjs_dart;
 import 'dart:html';
 import 'dart:js';
 import 'dart:async';
-import 'dart:math';
 
-import 'package:polymer/polymer.dart';
+import 'package:observe/observe.dart';
+import 'package:angular2/angular2.dart';
 
 export 'Events/MouseEvent.dart';
 export 'Events/MarkerEvent.dart';
@@ -34,7 +34,7 @@ toJs(var obj) => obj;
 
 final String _leafletDefMarker = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/marker-icon.png';
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
-final String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
+const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
@@ -58,42 +58,49 @@ class MapHelpers {
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
 }
 
-@CustomTag('leafletjs-map')
-class Leafletjs extends PolymerElement {
+@Component(
+    selector: 'leafletjs-map',
+    templateUrl: 'leafletjs.html'
+    //styleUrls: const ['packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css']
+)
+class Leafletjs extends Observable implements OnInit {
   
-  Leafletjs.created() : super.created();
+  Leafletjs(ElementRef el)
+  {
+    mapContainer = (el.nativeElement as Element).querySelector('#leafletjs-map');
+  }
 
+  DivElement mapContainer;
+  
   L.GMap map;
   L.TileLayer mapLayer;
   
-  @observable
-  String map_type = "OSM";
-  @observable
-  List<double> start_point = [0.0, 0.0];
+  @Input() String map_type = "OSM";
+  @Input() List<double> start_point = [0.0, 0.0];
   
-  
-  @reflectable
-  L.LatLng Center;
-  
-  @reflectable
-  L.LatLngBounds Region;
+  @observable L.LatLng Center;
+  @observable L.LatLngBounds Region;
   
   L.Icon defMarkerIcon;
   L.LayerGroup _markersGroup;
   
-  ready() {
-    super.ready();
-    _initMap();
-    _InitDefaultIconStyle();
-    _InitMarkerLayers();
-    _InitListeners();
+  @override
+  onInit() {
+    var script = loadJs()..onLoad.listen((_){
+      _initMap();
+      _InitDefaultIconStyle();
+      _InitMarkerLayers();
+      _InitListeners();
+    });
+    document.body.append(script);
   }
   
-  attached() {
-    super.attached();
-    shadowRoot.append(
-      new StyleElement()..text = "@import '${map_css}';"
-    );
+  ScriptElement loadJs() {
+    ScriptElement script = new ScriptElement();
+    script.async = false;
+    script.src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
+    script.type = "text/javascript";
+    return script;
   }
 
   asyncDeliverChanges() async => deliverChanges();
@@ -102,8 +109,8 @@ class Leafletjs extends PolymerElement {
     try {
       context['Leaflet'] = context['L'].callMethod('noConflict');
     } catch(e){}
-
-    var targetElement = $['leafletjs-map'];
+        
+    var targetElement = mapContainer;
     L.MapOptions params = new L.MapOptions(
         center: L.LatLng.FromList(start_point),
         zoom: 10
@@ -265,5 +272,4 @@ class Leafletjs extends PolymerElement {
   L.IHandler get keyboard => map.keyboard;
   L.IHandler get tap => map.tap;
   L.IHandler get touchZoom => map.touchZoom;
-
 }
