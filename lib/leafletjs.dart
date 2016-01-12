@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:js';
 import 'dart:async';
 
+import 'package:js/js.dart';
 import 'package:observe/observe.dart';
 import 'package:angular2/angular2.dart';
 
@@ -35,6 +36,9 @@ final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png
 const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 const String js_src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
+
+@JS('JSON.stringify')
+external Strnig asString(var e, replacer);
 
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
@@ -161,12 +165,16 @@ class Leafletjs extends Observable implements OnInit {
       asyncDeliverChanges();
     }));
     map.on('dblclick', allowInterop((var e){
-      L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', e['latlng']);
+      var jsEvt = new JsObject.fromBrowserObject(e);
+      L.LatLng pnt = jsEvt['latlng'];
+      L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', pnt);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
     map.on('click', allowInterop((var e){
-      L.MouseEvent evt = new L.MouseEvent.fromJs('click', e['latlng']);
+      var jsEvt = new JsObject.fromBrowserObject(e);
+      L.LatLng pnt = jsEvt['latlng'];
+      L.MouseEvent evt = new L.MouseEvent.fromJs('click', pnt);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
