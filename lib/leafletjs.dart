@@ -61,7 +61,6 @@ class MapHelpers {
 @Component(
     selector: 'leafletjs-map',
     templateUrl: 'leafletjs.html'
-    /*styleUrls: const ['package:leafletjs/3pp/leafletjs_0.7.3/leaflet.css']*/
 )
 class Leafletjs extends Observable implements OnInit {
   Leafletjs(this.elRef);
@@ -92,6 +91,9 @@ class Leafletjs extends Observable implements OnInit {
       _InitListeners();
     });
     document.body.append(script);
+
+    StyleElement style = new StyleElement()..text = "@import '${map_css}'";
+    document.body.append(style);
   }
   
   ScriptElement loadJs() {
