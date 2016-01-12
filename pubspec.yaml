@@ -13,3 +13,7 @@ transformers:
 - observe
 - angular2:
     entry_points: web/index.dart
+- $dart2js:
+    minify: true
+    checked: false
+    sourceMaps: false

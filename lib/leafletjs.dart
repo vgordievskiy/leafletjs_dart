@@ -30,8 +30,6 @@ import 'Events/MarkerEvent.dart' as L;
 import 'Events/MapEvent.dart' as L;
 import 'Events/TileLayerEvent.dart' as L;
 
-toJs(var obj) => obj;
-
 final String _leafletDefMarker = 'packages/leafletjs/3pp/leafletjs_0.7.3/images/marker-icon.png';
 final String _Imageurl = 'http://openlayers.org/en/v3.7.0/examples/data/icon.png';
 const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
