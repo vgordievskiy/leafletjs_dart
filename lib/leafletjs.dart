@@ -37,9 +37,6 @@ const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 
 const String js_src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
 
-@JS('JSON.stringify')
-external Strnig asString(var e, replacer);
-
 class MapHelpers {
   static Map<String, Function> avaliableMaps = { 
     'OSM' : () => L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
@@ -66,7 +63,7 @@ class MapHelpers {
     selector: 'leafletjs-map',
     templateUrl: 'leafletjs.html'
 )
-class Leafletjs extends Observable implements OnInit {
+class Leafletjs extends Observable implements OnInit, OnChanges {
   Leafletjs(this.elRef);
 
   ElementRef elRef;
@@ -75,7 +72,7 @@ class Leafletjs extends Observable implements OnInit {
   L.GMap map;
   L.TileLayer mapLayer;
   
-  @Input() String map_type = "OSM";
+  @Input('map-type') String mapType = "OSM";
   @Input() List<double> start_point = [0.0, 0.0];
   
   @observable L.LatLng Center;
@@ -121,7 +118,7 @@ class Leafletjs extends Observable implements OnInit {
         zoom: 10
     ); 
     map = L.map(targetElement, params);
-    mapLayer = MapHelpers.getMapLayer(map_type)..addTo(map);
+    mapLayer = MapHelpers.getMapLayer(mapType)..addTo(map);
     
     if(map.tap!= null) map.tap.disable();
     
@@ -281,4 +278,9 @@ class Leafletjs extends Observable implements OnInit {
   L.IHandler get keyboard => map.keyboard;
   L.IHandler get tap => map.tap;
   L.IHandler get touchZoom => map.touchZoom;
+
+  @override
+  ngOnChanges(Map<String, SimpleChange> changes) {
+    print("!!!! ${changes}");
+  }
 }
