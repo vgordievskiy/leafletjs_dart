@@ -63,7 +63,7 @@ class MapHelpers {
     selector: 'leafletjs-map',
     templateUrl: 'leafletjs.html'
 )
-class Leafletjs extends Observable implements OnInit, OnChanges {
+class Leafletjs extends Observable implements OnInit {
   Leafletjs(this.elRef);
 
   ElementRef elRef;
@@ -278,9 +278,4 @@ class Leafletjs extends Observable implements OnInit, OnChanges {
   L.IHandler get keyboard => map.keyboard;
   L.IHandler get tap => map.tap;
   L.IHandler get touchZoom => map.touchZoom;
-
-  @override
-  ngOnChanges(Map<String, SimpleChange> changes) {
-    print("!!!! ${changes}");
-  }
 }
