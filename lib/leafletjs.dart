@@ -3,6 +3,7 @@ library leafletjs_dart;
 import 'dart:html';
 import 'dart:js';
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:js/js.dart';
 import 'package:observe/observe.dart';
@@ -73,7 +74,7 @@ class Leafletjs extends Observable implements OnInit {
   L.TileLayer mapLayer;
   
   @Input('map-type') String mapType = "OSM";
-  @Input('start-point') List<double> startPoint = [0.0, 0.0];
+  @Input('start-point') String startPoint = "[0.0, 0.0]";
   
   @observable L.LatLng Center;
   @observable L.LatLngBounds Region;
@@ -113,8 +114,11 @@ class Leafletjs extends Observable implements OnInit {
     } catch(e){}
         
     var targetElement = mapContainer;
+    
+    List<double> startPnt = JSON.decode(startPoint);
+    
     L.MapOptions params = new L.MapOptions(
-        center: L.LatLng.FromList(startPoint),
+        center: L.LatLng.FromList(startPnt),
         zoom: 10
     ); 
     map = L.map(targetElement, params);
