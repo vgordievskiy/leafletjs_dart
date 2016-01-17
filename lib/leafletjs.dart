@@ -128,6 +128,7 @@ class Leafletjs extends Observable implements OnInit {
     
     new Future(() =>map.invalidateSize());
     
+    Center = map.getCenter();
     Region = map.getBounds();
   }
   
