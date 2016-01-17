@@ -127,6 +127,8 @@ class Leafletjs extends Observable implements OnInit {
     if(map.tap!= null) map.tap.disable();
     
     new Future(() =>map.invalidateSize());
+    
+    Region = map.getBounds();
   }
   
   void _InitDefaultIconStyle() {
