@@ -168,17 +168,13 @@ class Leafletjs extends Observable implements OnInit {
       }
       asyncDeliverChanges();
     }));
-    map.on('dblclick', allowInterop((var e){
-      var jsEvt = new JsObject.fromBrowserObject(e);
-      L.LatLng pnt = jsEvt['latlng'];
-      L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', pnt);
+    map.on('dblclick', allowInterop((L.JsMouseEvent e){
+      L.MouseEvent evt = new L.MouseEvent.fromJs('dblclick', e.latlng);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
-    map.on('click', allowInterop((var e){
-      var jsEvt = new JsObject.fromBrowserObject(e);
-      L.LatLng pnt = jsEvt['latlng'];
-      L.MouseEvent evt = new L.MouseEvent.fromJs('click', pnt);
+    map.on('click', allowInterop((L.JsMouseEvent e){
+      L.MouseEvent evt = new L.MouseEvent.fromJs('click', e.latlng);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
@@ -195,8 +191,8 @@ class Leafletjs extends Observable implements OnInit {
   }
   
   _initMarkerListener(L.Marker marker) {
-    marker.on('click', allowInterop((var e){
-      L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e['target'], e['latlng']);
+    marker.on('click', allowInterop((L.JsMouseEvent e){
+      L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e.target, e.latlng);
       notifyChange(evt);
       asyncDeliverChanges();
     }));
