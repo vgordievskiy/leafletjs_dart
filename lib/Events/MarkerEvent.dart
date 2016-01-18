@@ -21,5 +21,5 @@ class MarkerEvent extends ChangeRecord {
   String get type => _type;
   L.LatLng get GeoPnt => _geoPnt;
   L.Marker get Marker => _marker;
-  int get Id => L.stamp(L.toJs(_marker));
+  int get Id => L.stamp(_marker);
 }
