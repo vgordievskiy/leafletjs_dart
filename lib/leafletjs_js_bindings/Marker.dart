@@ -33,7 +33,7 @@ class Marker extends Evented implements ILayer  {
   external LatLng getLatLng();
   external setLatLng(LatLng pnt);
   external bindPopup(dynamic el, PopupOptions params);
-  external JsObject toGeoJSON();
+  external Map toGeoJSON();
   external openPopup();
   external closePopup();
   external togglePopup();
