@@ -26,6 +26,12 @@ class PopupOptions {
   external factory PopupOptions();
 }
 
+@anonymous
+@JS()
+class GeoJson {
+  external factory GeoJson();
+}
+
 @JS()
 class Marker extends Evented implements ILayer  {
   external factory Marker(LatLng pnt, MarkerOptions params);
@@ -33,7 +39,7 @@ class Marker extends Evented implements ILayer  {
   external LatLng getLatLng();
   external setLatLng(LatLng pnt);
   external bindPopup(dynamic el, PopupOptions params);
-  external dynamic toGeoJSON();
+  external GeoJson toGeoJSON();
   external openPopup();
   external closePopup();
   external togglePopup();

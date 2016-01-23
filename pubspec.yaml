@@ -9,6 +9,7 @@ dependencies:
   js: any
   observe: any
   angular2: '2.0.0-beta.1'
+  simple_features: any
 transformers:
 - observe
 - angular2:
