@@ -39,7 +39,7 @@ const String map_css = "packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.css";
 const String js_src = "/packages/leafletjs/3pp/leafletjs_0.7.3/leaflet.js";
 
 class MapHelpers {
-  static Map<String, Function> avaliableMaps = { 
+  static Map<String, Function> avaliableMaps = {
     'OSM' : () => L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                                new L.TileOptions(
                                    attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors')),
@@ -54,8 +54,8 @@ class MapHelpers {
                                      new L.TileOptions( attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> and http://kosmosnimki.ru contributors')),
     'CartoDB-Dark' : () =>  L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
                                         new L.TileOptions( attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                                                           subdomains: 'abcd'))                                     
-  }; 
+                                                           subdomains: 'abcd'))
+  };
 
   static L.TileLayer getMapLayer(String type) => avaliableMaps[type]();
 }
@@ -65,40 +65,12 @@ class MapHelpers {
     templateUrl: 'leafletjs.html'
 )
 class Leafletjs extends Observable implements OnInit {
-  Leafletjs(this.elRef);
 
-  ElementRef elRef;
-  DivElement mapContainer;
-  
-  L.GMap map;
-  L.TileLayer mapLayer;
-  
-  @Input('map-type') String mapType = "OSM";
-  @Input('start-point') String startPoint = "[0.0, 0.0]";
-  
-  @observable L.LatLng Center;
-  @observable L.LatLngBounds Region;
-  
-  L.Icon defMarkerIcon;
-  L.LayerGroup _markersGroup;
-  
-  @override
-  ngOnInit() {
-    mapContainer = (elRef.nativeElement as Element).querySelector('#leafletjs-map');
-   
-    var script = loadJs()..onLoad.listen((_){
-      _initMap();
-      _InitDefaultIconStyle();
-      _InitMarkerLayers();
-      _InitListeners();
-    });
-    document.body.append(script);
+  static bool isLoaded = false;
+  static bool inDuring = false;
+  static Completer compLoad = new Completer();
 
-    StyleElement style = new StyleElement()..text = "@import '${map_css}'";
-    document.body.append(style);
-  }
-  
-  ScriptElement loadJs() {
+  static ScriptElement loadJs() {
     ScriptElement script = new ScriptElement();
     script.async = false;
     script.src = js_src;
@@ -106,32 +78,85 @@ class Leafletjs extends Observable implements OnInit {
     return script;
   }
 
+  static StyleElement loadStyle()
+    => new StyleElement()..text = "@import '${map_css}'";
+
+  static Future initJsPart() {
+    if(!isLoaded) {
+      if(!inDuring) {
+        inDuring = true;
+        ScriptElement script = Leafletjs.loadJs()..onLoad.listen((_){
+          compLoad.complete();
+          isLoaded = true;
+          inDuring = false;
+        });
+        document.body.append(script);
+        document.body.append(Leafletjs.loadStyle());
+      }
+      return compLoad.future;
+    } else return new Future.value();
+  }
+
+  Leafletjs(this.elRef) {
+    Leafletjs.initJsPart();
+  }
+
+  ElementRef elRef;
+  DivElement mapContainer;
+
+  L.GMap map;
+  L.TileLayer mapLayer;
+
+  @Input('map-type') String mapType = "OSM";
+  @Input('start-point') String startPoint = "[0.0, 0.0]";
+
+  @observable L.LatLng Center;
+  @observable L.LatLngBounds Region;
+
+  L.Icon defMarkerIcon;
+  L.LayerGroup _markersGroup;
+
+  @override
+  ngOnInit() {
+    mapContainer = (elRef.nativeElement as Element)
+      .querySelector('#leafletjs-map');
+
+    Leafletjs.initJsPart().then((_) => _initialize());
+  }
+
+  _initialize() {
+    _initMap();
+    _InitDefaultIconStyle();
+    _InitMarkerLayers();
+    _InitListeners();
+  }
+
   asyncDeliverChanges() async => deliverChanges();
-  
+
   _initMap() {
     try {
       context['Leaflet'] = context['L'].callMethod('noConflict');
     } catch(e){}
-        
+
     var targetElement = mapContainer;
-    
+
     List<double> startPnt = JSON.decode(startPoint);
-    
+
     L.MapOptions params = new L.MapOptions(
         center: L.LatLng.FromList(startPnt),
         zoom: 10
-    ); 
+    );
     map = L.map(targetElement, params);
     mapLayer = MapHelpers.getMapLayer(mapType)..addTo(map);
-    
+
     if(map.tap!= null) map.tap.disable();
-    
-    new Future(() =>map.invalidateSize());
-    
+
+    new Future(() => map.invalidateSize());
+
     Center = map.getCenter();
     Region = map.getBounds();
   }
-  
+
   void _InitDefaultIconStyle() {
     /*Init marker style*/
     ImageElement image =  new ImageElement(src: _leafletDefMarker);
@@ -143,17 +168,17 @@ class Leafletjs extends Observable implements OnInit {
       ));
     });
   }
-  
+
   void _InitMarkerLayers() {
     _markersGroup = new L.LayerGroup([])..addTo(map);
   }
-  
+
   _fireMapEvent(String name) {
     L.MapEvent evt = new L.MapEvent.fromJs(name);
     notifyChange(evt);
     asyncDeliverChanges();
   }
-  
+
   void _InitListeners() {
     map.on('moveend', allowInterop((var e){
       { /*Notify of visible region are changed*/
@@ -189,7 +214,7 @@ class Leafletjs extends Observable implements OnInit {
       asyncDeliverChanges();
     }));
   }
-  
+
   _initMarkerListener(L.Marker marker) {
     marker.on('click', allowInterop((L.JsMouseEvent e){
       L.MarkerEvent evt = new L.MarkerEvent.fromJs('click', e.target, e.latlng);
@@ -197,7 +222,7 @@ class Leafletjs extends Observable implements OnInit {
       asyncDeliverChanges();
     }));
   }
-  
+
   Future SetCenter(L.LatLng pnt) {
     Completer comp = new Completer();
     if(L.compareGeoPnt(Center, pnt, 6)) {
@@ -215,7 +240,7 @@ class Leafletjs extends Observable implements OnInit {
     map.panTo(pnt);
     return comp.future;
   }
-  
+
   Future SetZoom(int number) {
     Completer comp = new Completer();
     if(number == map.getZoom()) {
@@ -225,13 +250,13 @@ class Leafletjs extends Observable implements OnInit {
     map.setZoom(number);
     return comp.future;
   }
-  
+
   int GetZoom() => map.getZoom();
-  
+
   Future Invalidatesize() {
    return new Future.delayed(new Duration(milliseconds: 300), () =>map.invalidateSize());
   }
-  
+
   int AddMarker(
     L.LatLng pnt,
     {
@@ -245,18 +270,18 @@ class Leafletjs extends Observable implements OnInit {
       pnt,
       new L.MarkerOptions(icon: usedIcon, title: title)
     );
-    
+
     if (popup!=null)  marker.bindPopup(popup , new L.PopupOptions());
-    
+
     _markersGroup.addLayer(marker);
     _initMarkerListener(marker);
     return L.stamp(marker);
   }
-  
+
   L.Marker GetMarker(int id) {
     return _markersGroup.getLayer("$id");
   }
-  
+
   Map<int, L.Marker> GetMarkers() {
     Map<int, L.Marker> ret = new Map();
     for(L.ILayer layer in _markersGroup.getLayers()) {
@@ -264,16 +289,16 @@ class Leafletjs extends Observable implements OnInit {
     }
     return ret;
   }
-  
+
   RemoveMarker(int id) {
     L.ILayer layer = _markersGroup.getLayer("$id");
     _markersGroup.removeLayer(layer);
   }
-  
+
   void ClearAllMarkers() {
     _markersGroup.clearLayers();
   }
-  
+
   L.IHandler get dragging => map.dragging;
   L.IHandler get doubleClickZoom => map.doubleClickZoom;
   L.IHandler get scrollWheelZoom => map.scrollWheelZoom;
