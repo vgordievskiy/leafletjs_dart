@@ -8,7 +8,7 @@ dependencies:
   func: any
   js: any
   observe: any
-  angular2: '2.0.0-beta.1'
+  angular2: ^2.0.0-beta.6
   simple_features: any
 transformers:
 - observe
