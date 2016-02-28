@@ -1,5 +1,4 @@
 .leafletjs-map-style {
-  height: inherit;
-  width: inherit;
-  position: inherit !important;
+  height: 100%;
+  width: 100%;
 }
