@@ -62,6 +62,7 @@ class MapHelpers {
 
 @Component(
     selector: 'leafletjs-map',
+    styleUrls:  const['leafletjs.css'],
     templateUrl: 'leafletjs.html'
 )
 class Leafletjs extends Observable implements OnInit {
