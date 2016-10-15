@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:js/js.dart';
 import 'package:observe/observe.dart';
+import 'package:observe/mirrors_used.dart';
 import 'package:angular2/angular2.dart';
 
 export 'Events/MouseEvent.dart';
@@ -65,7 +66,7 @@ class MapHelpers {
     styleUrls:  const['leafletjs.css'],
     templateUrl: 'leafletjs.html'
 )
-class Leafletjs extends Observable implements OnInit {
+class Leafletjs extends Object with Observable implements OnInit {
 
   static bool isLoaded = false;
   static bool inDuring = false;
