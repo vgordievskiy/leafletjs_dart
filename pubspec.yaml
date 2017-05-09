@@ -8,12 +8,12 @@ dependencies:
   func: any
   js: any
   observe: any
-  angular2: ^2.0.0-beta.7
+  angular2: any
   simple_features: any
 transformers:
 - angular2:
     entry_points: [web/index.dart]
 - $dart2js:
     minify: true
-    checked: true
+    checked: false
     sourceMaps: false
